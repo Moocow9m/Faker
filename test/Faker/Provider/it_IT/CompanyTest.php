@@ -14,7 +14,7 @@ final class CompanyTest extends TestCase
         $this->assertRegExp('/^IT[0-9]{11}$/', $vatId);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new Company($faker));

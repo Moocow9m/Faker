@@ -24,7 +24,7 @@ final class PersonTest extends TestCase
         $this->assertTrue($sum != 0 && $sum % 11 == 0);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new Person($faker));

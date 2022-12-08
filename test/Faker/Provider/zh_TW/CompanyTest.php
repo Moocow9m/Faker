@@ -15,7 +15,7 @@ final class CompanyTest extends TestCase
         $this->assertEquals(8, floor(log10($this->faker->VAT) + 1));
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new Company($faker));

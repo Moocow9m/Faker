@@ -18,7 +18,7 @@ final class AddressTest extends TestCase
         $this->assertRegExp('/^Blk\s*\d{2,3}[A-H]*$/i', $this->faker->blockNumber());
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = Factory::create('en_SG');
         $faker->addProvider(new Address($faker));

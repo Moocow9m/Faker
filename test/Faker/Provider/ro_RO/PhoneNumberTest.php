@@ -23,7 +23,7 @@ final class PhoneNumberTest extends TestCase
         $this->assertRegExp('/^090[036]\d{6}$/', $this->faker->premiumRatePhoneNumber());
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new PhoneNumber($faker));

@@ -71,7 +71,7 @@ final class BiasedTest extends TestCase
         }
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->generator = new Generator();
         $this->generator->addProvider(new Biased($this->generator));

@@ -25,7 +25,7 @@ final class PersonTest extends TestCase
         $this->assertRegExp('/\d{2}\.\d{3}\.\d{3}-[0-9X]/', $rg);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new Person($faker));

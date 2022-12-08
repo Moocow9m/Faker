@@ -16,11 +16,11 @@ final class PhoneNumberTest extends TestCase
         $phoneNumber = $this->faker->phoneNumber();
 
         $this->assertNotEmpty($phoneNumber);
-        $this->assertInternalType('string', $phoneNumber);
+        $this->assertIsString($phoneNumber);
         $this->assertRegExp('/^(0|(\+234))\s?[789][01]\d\s?(\d{3}\s?\d{4})/', $phoneNumber);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new PhoneNumber($faker));

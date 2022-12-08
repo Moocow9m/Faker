@@ -24,7 +24,7 @@ final class PhoneNumberTest extends TestCase
         $this->assertTrue(Luhn::isValid($imei));
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new PhoneNumber($faker));

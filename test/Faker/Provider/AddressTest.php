@@ -13,7 +13,7 @@ final class AddressTest extends TestCase
     public function testLatitude()
     {
         $latitude = $this->faker->latitude();
-        $this->assertInternalType('float', $latitude);
+        $this->assertIsFloat($latitude);
         $this->assertGreaterThanOrEqual(-90, $latitude);
         $this->assertLessThanOrEqual(90, $latitude);
     }
@@ -21,7 +21,7 @@ final class AddressTest extends TestCase
     public function testLongitude()
     {
         $longitude = $this->faker->longitude();
-        $this->assertInternalType('float', $longitude);
+        $this->assertIsFloat($longitude);
         $this->assertGreaterThanOrEqual(-180, $longitude);
         $this->assertLessThanOrEqual(180, $longitude);
     }
@@ -29,16 +29,16 @@ final class AddressTest extends TestCase
     public function testCoordinate()
     {
         $coordinate = $this->faker->localCoordinates();
-        $this->assertInternalType('array', $coordinate);
-        $this->assertInternalType('float', $coordinate['latitude']);
+        $this->assertIsArray($coordinate);
+        $this->assertIsFloat($coordinate['latitude']);
         $this->assertGreaterThanOrEqual(-90, $coordinate['latitude']);
         $this->assertLessThanOrEqual(90, $coordinate['latitude']);
-        $this->assertInternalType('float', $coordinate['longitude']);
+        $this->assertIsFloat($coordinate['longitude']);
         $this->assertGreaterThanOrEqual(-180, $coordinate['longitude']);
         $this->assertLessThanOrEqual(180, $coordinate['longitude']);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new Address($faker));

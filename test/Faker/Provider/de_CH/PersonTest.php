@@ -25,7 +25,7 @@ final class PersonTest extends TestCase
         $this->assertTrue(Ean::isValid(str_replace('.', '', $ahv)));
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new Person($faker));

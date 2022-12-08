@@ -17,7 +17,7 @@ final class AddressTest extends TestCase
     {
         $city = $this->faker->city();
         $this->assertNotEmpty($city);
-        $this->assertInternalType('string', $city);
+        $this->assertIsString($city);
         $this->assertRegExp('/[A-Z][a-z]+/', $city);
     }
 
@@ -25,7 +25,7 @@ final class AddressTest extends TestCase
     {
         $country = $this->faker->country();
         $this->assertNotEmpty($country);
-        $this->assertInternalType('string', $country);
+        $this->assertIsString($country);
         $this->assertRegExp('/[A-Z][a-z]+/', $country);
     }
 
@@ -33,7 +33,7 @@ final class AddressTest extends TestCase
     {
         $localityName = $this->faker->localityName();
         $this->assertNotEmpty($localityName);
-        $this->assertInternalType('string', $localityName);
+        $this->assertIsString($localityName);
         $this->assertRegExp('/[A-Z][a-z]+/', $localityName);
     }
 
@@ -41,11 +41,11 @@ final class AddressTest extends TestCase
     {
         $areaSuffix = $this->faker->areaSuffix();
         $this->assertNotEmpty($areaSuffix);
-        $this->assertInternalType('string', $areaSuffix);
+        $this->assertIsString($areaSuffix);
         $this->assertRegExp('/[A-Z][a-z]+/', $areaSuffix);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new Address($faker));

@@ -34,7 +34,7 @@ final class CompanyTest extends TestCase
             "'$phrase' - should be contain 3 word");
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new Company($faker));

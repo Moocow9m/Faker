@@ -50,7 +50,7 @@ final class TextTest extends TestCase
         return $method;
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->textClass = new \ReflectionClass(\Faker\Provider\fr_FR\Text::class);
     }

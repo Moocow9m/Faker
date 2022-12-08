@@ -78,6 +78,7 @@ final class PaymentTest extends TestCase
 
         if (!isset($this->ibanFormats[$countryCode])) {
             // No IBAN format available
+            self::assertTrue(true); // This is a hack to make PHPUnit happy
             return;
         }
 
@@ -88,7 +89,6 @@ final class PaymentTest extends TestCase
         } catch (\InvalidArgumentException $e) {
             // Not implemented, nothing to test
             $this->markTestSkipped("bankAccountNumber not implemented for $locale");
-            return;
         }
 
         // Test format
@@ -130,7 +130,7 @@ final class PaymentTest extends TestCase
         $this->assertTrue(Iban::isValid($iban), "Checksum for $iban is invalid");
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new BaseProvider($faker));

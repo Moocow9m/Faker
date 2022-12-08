@@ -17,7 +17,7 @@ final class PersonTest extends TestCase
 
         $this->assertEquals(13, strlen($idNumber));
         $this->assertRegExp('#^\d{13}$#', $idNumber);
-        $this->assertInternalType('string', $idNumber);
+        $this->assertIsString($idNumber);
     }
 
     public function testIdNumberForMales()
@@ -59,7 +59,7 @@ final class PersonTest extends TestCase
         $this->assertContains(Person::titleFemale(), $validateFemaleTitles);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new Person($faker));

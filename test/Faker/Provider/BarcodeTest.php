@@ -28,7 +28,7 @@ final class BarcodeTest extends TestCase
         $this->assertEquals(TestableBarcode::eanChecksum($codeWithoutChecksum), $checksum);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new Barcode($faker));

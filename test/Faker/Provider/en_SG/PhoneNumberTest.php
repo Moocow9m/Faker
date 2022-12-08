@@ -39,7 +39,7 @@ final class PhoneNumberTest extends TestCase
     // x means 0 to 9
     // z means 1 to 8 only
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->faker = Factory::create('en_SG');
         $this->faker->seed(1);

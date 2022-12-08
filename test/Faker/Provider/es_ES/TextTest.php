@@ -15,7 +15,7 @@ final class TextTest extends TestCase
         $this->assertNotSame('', $this->faker->realtext(200, 2));
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new Text($faker));

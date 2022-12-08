@@ -18,10 +18,10 @@ final class AddressTest extends TestCase
     {
         $secondaryAdress = $this->faker->secondaryAddress();
         $this->assertNotEmpty($secondaryAdress);
-        $this->assertInternalType('string', $secondaryAdress);
+        $this->assertIsString($secondaryAdress);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new Address($faker));

@@ -17,7 +17,7 @@ final class PaymentTest extends TestCase
         $this->assertEquals(26, strlen($accNo));
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new Payment($faker));

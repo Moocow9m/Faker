@@ -64,16 +64,15 @@ final class ImageTest extends TestCase
         $this->assertRegexp('#\d{5}#', $splitUrl[1]);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testUrlWithDimensionsAndBadCategory()
     {
+        $this->expectException(\InvalidArgumentException::class);
         Image::imageUrl(800, 400, 'bullhonky');
     }
 
     public function testDownloadWithDefaults()
     {
+        $file = null;
         $this->markTestSkipped('Skipped due to unstable service prior 1.9.0 release');
 
         $url = "http://lorempixel.com/";

@@ -46,7 +46,7 @@ final class PersonTest extends TestCase
         $this->assertEquals(0, $pin[9] % 2);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new Person($faker));

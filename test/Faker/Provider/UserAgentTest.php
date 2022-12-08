@@ -12,11 +12,17 @@ final class UserAgentTest extends TestCase
         $this->assertNotNull(UserAgent::userAgent());
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testFirefoxUserAgent()
     {
         $this->stringContains(' Firefox/', UserAgent::firefox());
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testSafariUserAgent()
     {
         $this->stringContains('Safari/', UserAgent::safari());
@@ -32,6 +38,9 @@ final class UserAgentTest extends TestCase
         $this->assertStringStartsWith('Opera/', UserAgent::opera());
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testChromeUserAgent()
     {
         $this->stringContains('(KHTML, like Gecko) Chrome/', UserAgent::chrome());

@@ -26,7 +26,7 @@ final class CompanyTest extends TestCase
         $this->assertRegExp('/^NL[0-9]{9}B[0-9]{2}$/', $btwNo);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new Company($faker));

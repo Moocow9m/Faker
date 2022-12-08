@@ -23,7 +23,7 @@ final class CompanyTest extends TestCase
         $this->assertRegExp($pattern, $rif);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->seed(1);

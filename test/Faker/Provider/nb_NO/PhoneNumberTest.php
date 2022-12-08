@@ -39,7 +39,7 @@ final class PhoneNumberTest extends TestCase
         }
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new PhoneNumber($faker));

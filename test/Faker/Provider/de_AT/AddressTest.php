@@ -21,7 +21,7 @@ final class AddressTest extends TestCase
         $this->assertRegExp('/^[1-9]\d{3}$/', $postcode);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
 

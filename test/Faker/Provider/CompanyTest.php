@@ -18,7 +18,7 @@ final class CompanyTest extends TestCase
         $this->assertRegExp($pattern, $jobTitle);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new Company($faker));

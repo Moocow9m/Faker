@@ -114,7 +114,7 @@ final class PersonTest extends TestCase
      */
     public function test_invalidGender_throwsException($value)
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $this->faker->cnp($value);
     }
 
@@ -139,7 +139,7 @@ final class PersonTest extends TestCase
      */
     public function test_invalidYear_throwsException($value)
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $this->faker->cnp(null, $value);
     }
 
@@ -162,7 +162,7 @@ final class PersonTest extends TestCase
      */
     public function test_invalidCountyCode_throwsException($value)
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $this->faker->cnp(null, null, $value);
     }
 
@@ -203,7 +203,7 @@ final class PersonTest extends TestCase
         );
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new DateTime($faker));
@@ -212,7 +212,7 @@ final class PersonTest extends TestCase
         $this->faker = $faker;
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->faker->setDefaultTimezone();
     }

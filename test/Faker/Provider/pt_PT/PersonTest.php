@@ -44,7 +44,7 @@ final class PersonTest extends TestCase
         return false;
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new Person($faker));

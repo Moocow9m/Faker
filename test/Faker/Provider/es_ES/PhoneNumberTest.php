@@ -5,7 +5,7 @@ namespace Faker\Test\Provider\es_ES;
 use Faker\Generator;
 use Faker\Provider\es_ES\PhoneNumber;
 
-final class PhoneNumberTest extends \PHPUnit_Framework_TestCase
+final class PhoneNumberTest extends \PHPUnit\Framework\TestCase
 {
     public function testMobileNumber()
     {
@@ -17,7 +17,7 @@ final class PhoneNumberTest extends \PHPUnit_Framework_TestCase
         self::assertEquals(11, strlen($this->faker->tollFreeNumber()));
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new PhoneNumber($faker));

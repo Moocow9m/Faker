@@ -45,7 +45,7 @@ final class PersonTest extends TestCase
         $this->assertContains(substr($nik, 0, 4), static::$birthPlaceCode);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new Person($faker));

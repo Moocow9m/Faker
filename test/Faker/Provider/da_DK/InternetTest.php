@@ -19,7 +19,7 @@ final class InternetTest extends TestCase
         $this->assertNotFalse(filter_var($email, FILTER_VALIDATE_EMAIL));
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new Person($faker));

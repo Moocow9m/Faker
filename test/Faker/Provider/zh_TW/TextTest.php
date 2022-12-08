@@ -69,7 +69,7 @@ final class TextTest extends TestCase
         );
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->textClass = new \ReflectionClass(\Faker\Provider\zh_TW\Text::class);
     }

@@ -37,7 +37,7 @@ final class PersonTest extends TestCase
         $this->assertContains($this->faker->licenceCode, $validLicenceCodes);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->seed(1);

@@ -60,7 +60,7 @@ final class DateTimeTest extends TestCase
     public function testUnixTime()
     {
         $timestamp = DateTimeProvider::unixTime();
-        $this->assertInternalType('int', $timestamp);
+        $this->assertIsInt($timestamp);
         $this->assertGreaterThanOrEqual(0, $timestamp);
         $this->assertLessThanOrEqual(time(), $timestamp);
     }
@@ -260,13 +260,13 @@ final class DateTimeTest extends TestCase
         mt_srand();
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->defaultTz = 'UTC';
         DateTimeProvider::setDefaultTimezone($this->defaultTz);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         DateTimeProvider::setDefaultTimezone();
     }

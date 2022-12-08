@@ -18,7 +18,7 @@ final class PaymentTest extends TestCase
         $this->assertRegExp('/^(BE0\d{9})$/', $unspacedVat);
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $faker = new Generator();
         $faker->addProvider(new Payment($faker));
