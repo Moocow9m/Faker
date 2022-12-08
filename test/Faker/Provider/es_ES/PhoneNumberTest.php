@@ -9,12 +9,12 @@ final class PhoneNumberTest extends \PHPUnit_Framework_TestCase
 {
     public function testMobileNumber()
     {
-        $this->assertNotEquals('', $this->faker->mobileNumber());
+        self::assertNotEquals('', $this->faker->mobileNumber());
     }
 
     public function testTollFreeNumber()
     {
-        $this->assertEquals(11, strlen($this->faker->tollFreeNumber()));
+        self::assertEquals(11, strlen($this->faker->tollFreeNumber()));
     }
 
     protected function setUp()

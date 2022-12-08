@@ -88,7 +88,7 @@ class Company extends \Faker\Provider\Company
             $format = static::randomElement(static::$catchPhraseFormats);
             $catchPhrase = ucfirst($this->generator->parse($format));
 
-            if ($this->isCatchPhraseValid($catchPhrase)) {
+            if (static::isCatchPhraseValid($catchPhrase)) {
                 break;
             }
         } while (true);
@@ -128,7 +128,7 @@ class Company extends \Faker\Provider\Company
     {
         $siret = self::siren(false);
         $nicFormat = static::randomElement(static::$siretNicFormats);
-        $siret .= $this->numerify($nicFormat);
+        $siret .= static::numerify($nicFormat);
         $siret .= Luhn::computeCheckDigit($siret);
         if ($formatted) {
             $siret = substr($siret, 0, 3) . ' ' . substr($siret, 3, 3) . ' ' . substr($siret, 6, 3) . ' ' . substr($siret, 9, 5);

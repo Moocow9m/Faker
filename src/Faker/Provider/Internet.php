@@ -183,9 +183,9 @@ class Internet extends Base
      */
     public function password($minLength = 6, $maxLength = 20)
     {
-        $pattern = str_repeat('*', $this->numberBetween($minLength, $maxLength));
+        $pattern = str_repeat('*', static::numberBetween($minLength, $maxLength));
 
-        return $this->asciify($pattern);
+        return static::asciify($pattern);
     }
 
     /**

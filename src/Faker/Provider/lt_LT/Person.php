@@ -78,7 +78,7 @@ class Person extends \Faker\Provider\Person
      */
     public function driverLicence()
     {
-        return $this->bothify("########");
+        return static::bothify("########");
     }
 
     /**
@@ -88,7 +88,7 @@ class Person extends \Faker\Provider\Person
      */
     public function passportNumber()
     {
-        return $this->bothify("########");
+        return static::bothify("########");
     }
 
     /**

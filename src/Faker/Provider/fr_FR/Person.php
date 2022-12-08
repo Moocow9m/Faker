@@ -39,14 +39,14 @@ class Person extends \Faker\Provider\Person
         } elseif ($gender === static::GENDER_FEMALE) {
             $nir = 2;
         } else {
-            $nir = $this->numberBetween(1, 2);
+            $nir = static::numberBetween(1, 2);
         }
 
         $nir .=
             // Year of birth (aa)
-            $this->numerify('##') .
+            static::numerify('##') .
             // Mont of birth (mm)
-            sprintf('%02d', $this->numberBetween(1, 12));
+            sprintf('%02d', static::numberBetween(1, 12));
 
         // Department
         $department = key(Address::department());
@@ -54,13 +54,13 @@ class Person extends \Faker\Provider\Person
 
         // Town number, depends on department length
         if (strlen($department) === 2) {
-            $nir .= $this->numerify('###');
+            $nir .= static::numerify('###');
         } elseif (strlen($department) === 3) {
-            $nir .= $this->numerify('##');
+            $nir .= static::numerify('##');
         }
 
         // Born number (depending of town and month of birth)
-        $nir .= $this->numerify('###');
+        $nir .= static::numerify('###');
 
         /**
          * The key for a given NIR is `97 - 97 % NIR`

@@ -54,7 +54,7 @@ class Person extends \Faker\Provider\Person
             $countyCode = static::$cnpCountyCodes[$county];
         }
 
-        $cnp = (string)$this->getGenderDigit($date, $gender, $isResident)
+        $cnp = (string)static::getGenderDigit($date, $gender, $isResident)
             . $date->format('ymd')
             . $countyCode
             . static::numerify('##%');
