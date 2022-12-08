@@ -219,7 +219,7 @@ class Internet extends Base
      */
     public function ipv4()
     {
-        return long2ip(mt_rand(0, 1) == 0 ? mt_rand(-2147483648, -2) : mt_rand(16777216, 2147483647));
+        return long2ip(mt_rand(0, 1) == 0 ? mt_rand(-2_147_483_648, -2) : mt_rand(16_777_216, 2_147_483_647));
     }
 
     /**

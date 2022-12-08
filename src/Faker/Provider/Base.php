@@ -51,7 +51,7 @@ class Base
      * @example 79907610
      *
      */
-    public static function numberBetween($int1 = 0, $int2 = 2147483647)
+    public static function numberBetween($int1 = 0, $int2 = 2_147_483_647)
     {
         $min = $int1 < $int2 ? $int1 : $int2;
         $max = $int1 < $int2 ? $int2 : $int1;
@@ -290,18 +290,16 @@ class Base
      */
     public static function bothify($string = '## ??')
     {
-        $string = self::replaceWildcard($string, '*', function () {
-            return mt_rand(0, 1) ? '#' : '?';
-        });
+        $string = self::replaceWildcard($string, '*', fn() => mt_rand(0, 1) ? '#' : '?');
         return static::lexify(static::numerify($string));
     }
 
     private static function replaceWildcard($string, $wildcard = '#', $callback = 'static::randomDigit')
     {
-        if (($pos = strpos($string, $wildcard)) === false) {
+        if (($pos = strpos($string, (string) $wildcard)) === false) {
             return $string;
         }
-        for ($i = $pos, $last = strrpos($string, $wildcard, $pos) + 1; $i < $last; $i++) {
+        for ($i = $pos, $last = strrpos($string, (string) $wildcard, $pos) + 1; $i < $last; $i++) {
             if ($string[$i] === $wildcard) {
                 $string[$i] = call_user_func($callback);
             }
@@ -408,31 +406,17 @@ class Base
         $regex = preg_replace('/(?<!\\\)\*/', '{0,' . static::randomDigitNotNull() . '}', $regex);
         $regex = preg_replace('/(?<!\\\)\+/', '{1,' . static::randomDigitNotNull() . '}', $regex);
         // [12]{1,2} becomes [12] or [12][12]
-        $regex = preg_replace_callback('/(\[[^\]]+\])\{(\d+),(\d+)\}/', function ($matches) {
-            return str_repeat($matches[1], Base::randomElement(range($matches[2], $matches[3])));
-        }, $regex);
+        $regex = preg_replace_callback('/(\[[^\]]+\])\{(\d+),(\d+)\}/', fn($matches) => str_repeat($matches[1], Base::randomElement(range($matches[2], $matches[3]))), $regex);
         // (12|34){1,2} becomes (12|34) or (12|34)(12|34)
-        $regex = preg_replace_callback('/(\([^\)]+\))\{(\d+),(\d+)\}/', function ($matches) {
-            return str_repeat($matches[1], Base::randomElement(range($matches[2], $matches[3])));
-        }, $regex);
+        $regex = preg_replace_callback('/(\([^\)]+\))\{(\d+),(\d+)\}/', fn($matches) => str_repeat($matches[1], Base::randomElement(range($matches[2], $matches[3]))), $regex);
         // A{1,2} becomes A or AA or \d{3} becomes \d\d\d
-        $regex = preg_replace_callback('/(\\\?.)\{(\d+),(\d+)\}/', function ($matches) {
-            return str_repeat($matches[1], Base::randomElement(range($matches[2], $matches[3])));
-        }, $regex);
+        $regex = preg_replace_callback('/(\\\?.)\{(\d+),(\d+)\}/', fn($matches) => str_repeat($matches[1], Base::randomElement(range($matches[2], $matches[3]))), $regex);
         // (this|that) becomes 'this' or 'that'
-        $regex = preg_replace_callback('/\((.*?)\)/', function ($matches) {
-            return Base::randomElement(explode('|', str_replace(['(', ')'], '', $matches[1])));
-        }, $regex);
+        $regex = preg_replace_callback('/\((.*?)\)/', fn($matches) => Base::randomElement(explode('|', str_replace(['(', ')'], '', $matches[1]))), $regex);
         // All A-F inside of [] become ABCDEF
-        $regex = preg_replace_callback('/\[([^\]]+)\]/', function ($matches) {
-            return '[' . preg_replace_callback('/(\w|\d)\-(\w|\d)/', function ($range) {
-                    return implode('', range($range[1], $range[2]));
-                }, $matches[1]) . ']';
-        }, $regex);
+        $regex = preg_replace_callback('/\[([^\]]+)\]/', fn($matches) => '[' . preg_replace_callback('/(\w|\d)\-(\w|\d)/', fn($range) => implode('', range($range[1], $range[2])), $matches[1]) . ']', $regex);
         // All [ABC] become B (or A or C)
-        $regex = preg_replace_callback('/\[([^\]]+)\]/', function ($matches) {
-            return Base::randomElement(str_split($matches[1]));
-        }, $regex);
+        $regex = preg_replace_callback('/\[([^\]]+)\]/', fn($matches) => Base::randomElement(str_split($matches[1])), $regex);
         // replace \d with number and \w with letter and . with ascii
         $regex = preg_replace_callback('/\\\w/', 'static::randomLetter', $regex);
         $regex = preg_replace_callback('/\\\d/', 'static::randomDigit', $regex);

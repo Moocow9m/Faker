@@ -26,131 +26,81 @@ class Name
         $name = Base::toLower($name);
         $generator = $this->generator;
         if (preg_match('/^is[_A-Z]/', $name)) {
-            return function () use ($generator) {
-                return $generator->boolean;
-            };
+            return fn() => $generator->boolean;
         }
         if (preg_match('/(_a|A)t$/', $name)) {
-            return function () use ($generator) {
-                return $generator->dateTime;
-            };
+            return fn() => $generator->dateTime;
         }
         switch (str_replace('_', '', $name)) {
             case 'firstname':
-                return function () use ($generator) {
-                    return $generator->firstName;
-                };
+                return fn() => $generator->firstName;
             case 'lastname':
-                return function () use ($generator) {
-                    return $generator->lastName;
-                };
+                return fn() => $generator->lastName;
             case 'username':
             case 'login':
-                return function () use ($generator) {
-                    return $generator->userName;
-                };
+                return fn() => $generator->userName;
             case 'email':
             case 'emailaddress':
-                return function () use ($generator) {
-                    return $generator->email;
-                };
+                return fn() => $generator->email;
             case 'phonenumber':
             case 'phone':
             case 'telephone':
             case 'telnumber':
-                return function () use ($generator) {
-                    return $generator->phoneNumber;
-                };
+                return fn() => $generator->phoneNumber;
             case 'address':
-                return function () use ($generator) {
-                    return $generator->address;
-                };
+                return fn() => $generator->address;
             case 'city':
             case 'town':
-                return function () use ($generator) {
-                    return $generator->city;
-                };
+                return fn() => $generator->city;
             case 'streetaddress':
-                return function () use ($generator) {
-                    return $generator->streetAddress;
-                };
+                return fn() => $generator->streetAddress;
             case 'postcode':
             case 'zipcode':
-                return function () use ($generator) {
-                    return $generator->postcode;
-                };
+                return fn() => $generator->postcode;
             case 'state':
-                return function () use ($generator) {
-                    return $generator->state;
-                };
+                return fn() => $generator->state;
             case 'county':
                 if ($this->generator->locale == 'en_US') {
-                    return function () use ($generator) {
-                        return sprintf('%s County', $generator->city);
-                    };
+                    return fn() => sprintf('%s County', $generator->city);
                 }
 
-                return function () use ($generator) {
-                    return $generator->state;
-                };
+                return fn() => $generator->state;
             case 'country':
                 switch ($size) {
                     case 2:
-                        return function () use ($generator) {
-                            return $generator->countryCode;
-                        };
+                        return fn() => $generator->countryCode;
                     case 3:
-                        return function () use ($generator) {
-                            return $generator->countryISOAlpha3;
-                        };
+                        return fn() => $generator->countryISOAlpha3;
                     case 5:
                     case 6:
-                        return function () use ($generator) {
-                            return $generator->locale;
-                        };
+                        return fn() => $generator->locale;
                     default:
-                        return function () use ($generator) {
-                            return $generator->country;
-                        };
+                        return fn() => $generator->country;
                 }
                 break;
             case 'locale':
-                return function () use ($generator) {
-                    return $generator->locale;
-                };
+                return fn() => $generator->locale;
             case 'currency':
             case 'currencycode':
-                return function () use ($generator) {
-                    return $generator->currencyCode;
-                };
+                return fn() => $generator->currencyCode;
             case 'url':
             case 'website':
-                return function () use ($generator) {
-                    return $generator->url;
-                };
+                return fn() => $generator->url;
             case 'company':
             case 'companyname':
             case 'employer':
-                return function () use ($generator) {
-                    return $generator->company;
-                };
+                return fn() => $generator->company;
             case 'title':
                 if ($size !== null && $size <= 10) {
-                    return function () use ($generator) {
-                        return $generator->title;
-                    };
+                    return fn() => $generator->title;
                 }
 
-                return function () use ($generator) {
-                    return $generator->sentence;
-                };
+                return fn() => $generator->sentence;
             case 'body':
             case 'summary':
             case 'article':
             case 'description':
-                return function () use ($generator) {
-                    return $generator->text;
-                };
+                return fn() => $generator->text;
         }
     }
 }

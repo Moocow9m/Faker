@@ -107,8 +107,8 @@ class Company extends \Faker\Provider\Company
     {
         foreach (static::$wordsWhichShouldNotAppearTwice as $word) {
             // Fastest way to check if a piece of word does not appear twice.
-            $beginPos = strpos($catchPhrase, $word);
-            $endPos = strrpos($catchPhrase, $word);
+            $beginPos = strpos($catchPhrase, (string) $word);
+            $endPos = strrpos($catchPhrase, (string) $word);
 
             if ($beginPos !== false && $beginPos != $endPos) {
                 return false;

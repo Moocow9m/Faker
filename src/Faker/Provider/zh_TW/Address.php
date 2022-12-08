@@ -49,12 +49,12 @@ class Address extends \Faker\Provider\Address
 
     public static function localLatitude()
     {
-        return number_format(mt_rand(22000000, 25000000) / 1000000, 6);
+        return number_format(mt_rand(22_000_000, 25_000_000) / 1_000_000, 6);
     }
 
     public static function localLongitude()
     {
-        return number_format(mt_rand(120000000, 122000000) / 1000000, 6);
+        return number_format(mt_rand(120_000_000, 122_000_000) / 1_000_000, 6);
     }
 
     public static function stateAbbr()

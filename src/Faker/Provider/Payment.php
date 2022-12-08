@@ -43,7 +43,7 @@ class Payment extends Base
             } else {
                 $length = 0;
                 foreach ($format as $part) {
-                    list($class, $groupCount) = $part;
+                    [$class, $groupCount] = $part;
                     $length += $groupCount;
                 }
             }
@@ -54,7 +54,7 @@ class Payment extends Base
 
         $expandedFormat = '';
         foreach ($format as $item) {
-            list($class, $length) = $item;
+            [$class, $length] = $item;
             $expandedFormat .= str_repeat($class, $length);
         }
 

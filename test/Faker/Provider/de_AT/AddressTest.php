@@ -9,10 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 final class AddressTest extends TestCase
 {
-    /**
-     * @var Generator
-     */
-    private $faker;
+    private \Faker\Generator $faker;
 
     /**
      * @see https://en.wikipedia.org/wiki/List_of_postal_codes_in_Austria

@@ -142,7 +142,7 @@ class EntityPopulator
                         return $related;
                     }
 
-                    return $inserted[$relatedClass][mt_rand(0, count($inserted[$relatedClass]) - 1)];
+                    return $inserted[$relatedClass][mt_rand(0, (is_countable($inserted[$relatedClass]) ? count($inserted[$relatedClass]) : 0) - 1)];
                 }
 
                 return null;

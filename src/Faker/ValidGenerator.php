@@ -20,9 +20,7 @@ class ValidGenerator
     public function __construct(Generator $generator, $validator = null, $maxRetries = 10000)
     {
         if (is_null($validator)) {
-            $validator = function () {
-                return true;
-            };
+            $validator = fn() => true;
         } elseif (!is_callable($validator)) {
             throw new \InvalidArgumentException('valid() only accepts callables as first argument');
         }

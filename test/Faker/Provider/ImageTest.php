@@ -60,7 +60,7 @@ final class ImageTest extends TestCase
         $url = Image::imageUrl(800, 400);
         $splitUrl = preg_split('/\?/', $url);
 
-        $this->assertEquals(count($splitUrl), 2);
+        $this->assertEquals(is_countable($splitUrl) ? count($splitUrl) : 0, 2);
         $this->assertRegexp('#\d{5}#', $splitUrl[1]);
     }
 
@@ -92,7 +92,7 @@ final class ImageTest extends TestCase
         $file = Image::image(sys_get_temp_dir());
         $this->assertFileExists($file);
         if (function_exists('getimagesize')) {
-            list($width, $height, $type, $attr) = getimagesize($file);
+            [$width, $height, $type, $attr] = getimagesize($file);
             $this->assertEquals(640, $width);
             $this->assertEquals(480, $height);
             $this->assertEquals(constant('IMAGETYPE_JPEG'), $type);

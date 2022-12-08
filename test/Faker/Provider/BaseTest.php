@@ -126,7 +126,7 @@ final class BaseTest extends TestCase
     public function testRandomAsciiReturnsAsciiCharacter()
     {
         $lowercaseLetters = '!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
-        $this->assertNotFalse(strpos($lowercaseLetters, BaseProvider::randomAscii()));
+        $this->assertNotFalse(strpos($lowercaseLetters, (string) BaseProvider::randomAscii()));
     }
 
     public function testRandomElementReturnsNullWhenArrayEmpty()
@@ -482,9 +482,7 @@ final class BaseTest extends TestCase
         $faker = new \Faker\Generator();
         $faker->addProvider(new \Faker\Provider\Base($faker));
         $values = [];
-        $evenValidator = function ($digit) {
-            return $digit % 2 === 0;
-        };
+        $evenValidator = fn($digit) => $digit % 2 === 0;
         for ($i = 0; $i < 50; $i++) {
             $values[$faker->valid($evenValidator)->randomDigit] = true;
         }
@@ -500,9 +498,7 @@ final class BaseTest extends TestCase
     {
         $faker = new \Faker\Generator();
         $faker->addProvider(new \Faker\Provider\Base($faker));
-        $evenValidator = function ($digit) {
-            return $digit % 2 === 0;
-        };
+        $evenValidator = fn($digit) => $digit % 2 === 0;
         for ($i = 0; $i < 11; $i++) {
             $faker->valid($evenValidator)->randomElement([1, 3, 5, 7, 9]);
         }

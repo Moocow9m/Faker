@@ -8,10 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 final class PersonTest extends TestCase
 {
-    /**
-     * @var Generator
-     */
-    private $faker;
+    private \Faker\Generator $faker;
 
     /**
      * @link https://en.wikipedia.org/wiki/Malaysian_identity_card#Structure_of_the_National_Registration_Identity_Card_Number_(NRIC)

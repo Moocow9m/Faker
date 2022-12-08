@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 final class CompanyTest extends TestCase
 {
-    private $faker;
+    private \Faker\Generator $faker;
 
     public function testSiretReturnsAValidSiret()
     {

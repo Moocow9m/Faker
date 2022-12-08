@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 final class PersonTest extends TestCase
 {
-    const TEST_CNP_REGEX = '/^[1-9][0-9]{2}(?:0[1-9]|1[012])(?:0[1-9]|[12][0-9]|3[01])(?:0[1-9]|[123][0-9]|4[0-6]|5[12])[0-9]{3}[0-9]$/';
+    public const TEST_CNP_REGEX = '/^[1-9][0-9]{2}(?:0[1-9]|1[012])(?:0[1-9]|[12][0-9]|3[01])(?:0[1-9]|[123][0-9]|4[0-6]|5[12])[0-9]{3}[0-9]$/';
 
     /**
      * @var \Faker\Generator
@@ -62,7 +62,7 @@ final class PersonTest extends TestCase
     protected function isValidCnp($cnp)
     {
         if (preg_match(static::TEST_CNP_REGEX, $cnp) !== false) {
-            $checkNumber = 279146358279;
+            $checkNumber = 279_146_358_279;
 
             $checksum = 0;
             foreach (range(0, 11) as $digit) {

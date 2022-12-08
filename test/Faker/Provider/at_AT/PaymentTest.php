@@ -9,10 +9,7 @@ use PHPUnit\Framework\TestCase;
 final class PaymentTest extends TestCase
 {
 
-    /**
-     * @var Generator
-     */
-    private $faker;
+    private \Faker\Generator $faker;
 
     public function testVatIsValid()
     {

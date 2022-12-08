@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 final class BarcodeTest extends TestCase
 {
-    private $faker;
+    private \Faker\Generator $faker;
 
     public function testEan8()
     {

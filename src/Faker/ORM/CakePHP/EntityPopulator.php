@@ -108,9 +108,7 @@ class EntityPopulator
                 } else {
                     $foreignKeys = $table->find('all')
                         ->select(['id'])
-                        ->map(function ($row) {
-                            return $row->id;
-                        })
+                        ->map(fn($row) => $row->id)
                         ->toArray();
                 }
 

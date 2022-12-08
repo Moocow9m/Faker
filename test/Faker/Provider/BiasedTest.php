@@ -8,9 +8,15 @@ use PHPUnit\Framework\TestCase;
 
 final class BiasedTest extends TestCase
 {
-    const MAX = 10;
-    const NUMBERS = 25000;
+    public const MAX = 10;
+    public const NUMBERS = 25000;
+    /**
+     * @var \Faker\Generator
+     */
     protected $generator;
+    /**
+     * @var int[]
+     */
     protected $results = [];
 
     public function testUnbiased()

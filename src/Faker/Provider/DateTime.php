@@ -20,7 +20,7 @@ class DateTime extends Base
      */
     public static function dateTimeAD($max = 'now', $timezone = null)
     {
-        $min = (PHP_INT_SIZE > 4 ? -62135597361 : -PHP_INT_MAX);
+        $min = (PHP_INT_SIZE > 4 ? -62_135_597_361 : -PHP_INT_MAX);
         return static::setTimezone(
             new \DateTime('@' . mt_rand($min, static::getMaxTimestamp($max))),
             $timezone

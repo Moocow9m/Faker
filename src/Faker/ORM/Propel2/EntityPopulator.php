@@ -58,7 +58,7 @@ class EntityPopulator
                 $relatedClass = $columnMap->getRelation()->getForeignTable()->getClassname();
                 $formatters[$columnMap->getPhpName()] = function ($inserted) use ($relatedClass) {
                     $relatedClass = trim($relatedClass, "\\");
-                    return isset($inserted[$relatedClass]) ? $inserted[$relatedClass][mt_rand(0, count($inserted[$relatedClass]) - 1)] : null;
+                    return isset($inserted[$relatedClass]) ? $inserted[$relatedClass][mt_rand(0, (is_countable($inserted[$relatedClass]) ? count($inserted[$relatedClass]) : 0) - 1)] : null;
                 };
                 continue;
             }

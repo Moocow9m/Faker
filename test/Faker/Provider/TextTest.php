@@ -8,10 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 final class TextTest extends TestCase
 {
-    /**
-     * @var Generator
-     */
-    private $generator;
+    private ?\Faker\Generator $generator = null;
 
     /**
      * @before

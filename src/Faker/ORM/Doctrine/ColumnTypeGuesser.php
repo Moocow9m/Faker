@@ -26,53 +26,33 @@ class ColumnTypeGuesser
         $type = $class->getTypeOfField($fieldName);
         switch ($type) {
             case 'boolean':
-                return function () use ($generator) {
-                    return $generator->boolean;
-                };
+                return fn() => $generator->boolean;
             case 'decimal':
                 $size = $class->fieldMappings[$fieldName]['precision'] ?? 2;
 
-                return function () use ($generator, $size) {
-                    return $generator->randomNumber($size + 2) / 100;
-                };
+                return fn() => $generator->randomNumber($size + 2) / 100;
             case 'smallint':
-                return function () {
-                    return mt_rand(0, 65535);
-                };
+                return fn() => mt_rand(0, 65535);
             case 'integer':
-                return function () {
-                    return mt_rand(0, intval('2147483647'));
-                };
+                return fn() => mt_rand(0, intval('2147483647'));
             case 'bigint':
-                return function () {
-                    return mt_rand(0, intval('18446744073709551615'));
-                };
+                return fn() => mt_rand(0, intval('18446744073709551615'));
             case 'float':
-                return function () {
-                    return mt_rand(0, intval('4294967295')) / mt_rand(1, intval('4294967295'));
-                };
+                return fn() => mt_rand(0, intval('4294967295')) / mt_rand(1, intval('4294967295'));
             case 'string':
                 $size = $class->fieldMappings[$fieldName]['length'] ?? 255;
 
-                return function () use ($generator, $size) {
-                    return $generator->text($size);
-                };
+                return fn() => $generator->text($size);
             case 'text':
-                return function () use ($generator) {
-                    return $generator->text;
-                };
+                return fn() => $generator->text;
             case 'datetime':
             case 'date':
             case 'time':
-                return function () use ($generator) {
-                    return $generator->datetime;
-                };
+                return fn() => $generator->datetime;
             case 'datetime_immutable':
             case 'date_immutable':
             case 'time_immutable':
-                return function () use ($generator) {
-                    return \DateTimeImmutable::createFromMutable($generator->datetime);
-                };
+                return fn() => \DateTimeImmutable::createFromMutable($generator->datetime);
             default:
                 // no smart way to guess what the user expects here
                 return null;

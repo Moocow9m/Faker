@@ -60,9 +60,7 @@ class File extends Base
         }
 
         // Drop . and .. and reset array keys
-        $files = array_filter(array_values(array_diff(scandir($sourceDirectory), ['.', '..'])), function ($file) use ($sourceDirectory) {
-            return is_file($sourceDirectory . DIRECTORY_SEPARATOR . $file) && is_readable($sourceDirectory . DIRECTORY_SEPARATOR . $file);
-        });
+        $files = array_filter(array_values(array_diff(scandir($sourceDirectory), ['.', '..'])), fn($file) => is_file($sourceDirectory . DIRECTORY_SEPARATOR . $file) && is_readable($sourceDirectory . DIRECTORY_SEPARATOR . $file));
 
         if (empty($files)) {
             throw new \InvalidArgumentException(sprintf('Source directory %s is empty.', $sourceDirectory));

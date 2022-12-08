@@ -8,10 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 final class CompanyTest extends TestCase
 {
-    /**
-     * @var Generator
-     */
-    private $faker;
+    private \Faker\Generator $faker;
 
     /**
      * national Id format validator

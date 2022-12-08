@@ -22,12 +22,12 @@ final class ProviderOverrideTest extends TestCase
      * Regular expressions are sensitive for malformed strings (e.g.: strings with incorrect encodings) so by using
      * PCRE for the tests, even though they seem fairly pointless, we test for incorrect encodings also.
      */
-    const TEST_STRING_REGEX = '/.+/u';
+    public const TEST_STRING_REGEX = '/.+/u';
 
     /**
      * Slightly more specific for e-mail, the point isn't to properly validate e-mails.
      */
-    const TEST_EMAIL_REGEX = '/^(.+)@(.+)$/ui';
+    public const TEST_EMAIL_REGEX = '/^(.+)@(.+)$/ui';
 
     /**
      * @dataProvider localeDataProvider

@@ -16,7 +16,7 @@ class EntityPopulator
     /**
      * When fetching existing data - fetch only few first rows.
      */
-    const RELATED_FETCH_COUNT = 10;
+    public const RELATED_FETCH_COUNT = 10;
 
     /**
      * @var Mapper
@@ -134,7 +134,7 @@ class EntityPopulator
 
                 $formatters[$fieldName] = function ($inserted) use ($required, $entityName, $locator) {
                     if (!empty($inserted[$entityName])) {
-                        return $inserted[$entityName][mt_rand(0, count($inserted[$entityName]) - 1)]->get('id');
+                        return $inserted[$entityName][mt_rand(0, (is_countable($inserted[$entityName]) ? count($inserted[$entityName]) : 0) - 1)]->get('id');
                     }
 
                     if ($required && $this->useExistingData) {
@@ -146,7 +146,7 @@ class EntityPopulator
                             return null;
                         }
 
-                        return $records[mt_rand(0, count($records) - 1)]['id'];
+                        return $records[mt_rand(0, (is_countable($records) ? count($records) : 0) - 1)]['id'];
                     }
 
                     return null;

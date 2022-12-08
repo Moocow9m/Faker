@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 final class TextTest extends TestCase
 {
-    private $textClass;
+    private \ReflectionClass $textClass;
 
     function testItShouldExplodeTheStringToArray()
     {

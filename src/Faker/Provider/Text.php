@@ -84,7 +84,7 @@ abstract class Text extends Base
                 $index[] = array_shift($parts);
             }
 
-            for ($i = 0, $count = count($parts); $i < $count; $i++) {
+            for ($i = 0, $count = is_countable($parts) ? count($parts) : 0; $i < $count; $i++) {
                 $stringIndex = static::implode($index);
                 if (!isset($words[$stringIndex])) {
                     $words[$stringIndex] = [];

@@ -61,9 +61,9 @@ class Person extends \Faker\Provider\Person
     {
         $id = static::randomElement(static::$nationalityId);
         if ($id == 'V') {
-            return $id . $separator . static::numberBetween(10000, 100000000);
+            return $id . $separator . static::numberBetween(10000, 100_000_000);
         }
 
-        return $id . $separator . static::numberBetween(80000000, 100000000);
+        return $id . $separator . static::numberBetween(80_000_000, 100_000_000);
     }
 }

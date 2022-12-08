@@ -147,7 +147,7 @@ class Person extends \Faker\Provider\Person
      */
     protected function getChecksumDigit($value)
     {
-        $checkNumber = 279146358279;
+        $checkNumber = 279_146_358_279;
 
         $checksum = 0;
         foreach (range(0, 11) as $digit) {

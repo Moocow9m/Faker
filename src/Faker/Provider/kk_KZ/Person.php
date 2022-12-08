@@ -7,20 +7,20 @@ use Faker\Provider\DateTime;
 class Person extends \Faker\Provider\Person
 {
 
-    const GENDER_MALE = 0;
-    const GENDER_FEMALE = 1;
+    public const GENDER_MALE = 0;
+    public const GENDER_FEMALE = 1;
 
-    const CENTURY_19TH = 0;
-    const CENTURY_20TH = 1;
-    const CENTURY_21ST = 2;
+    public const CENTURY_19TH = 0;
+    public const CENTURY_20TH = 1;
+    public const CENTURY_21ST = 2;
 
-    const MALE_CENTURY_19TH = 1;
-    const MALE_CENTURY_20TH = 3;
-    const MALE_CENTURY_21ST = 5;
+    public const MALE_CENTURY_19TH = 1;
+    public const MALE_CENTURY_20TH = 3;
+    public const MALE_CENTURY_21ST = 5;
 
-    const FEMALE_CENTURY_19TH = 2;
-    const FEMALE_CENTURY_20TH = 4;
-    const FEMALE_CENTURY_21ST = 6;
+    public const FEMALE_CENTURY_19TH = 2;
+    public const FEMALE_CENTURY_20TH = 4;
+    public const FEMALE_CENTURY_21ST = 6;
 
     /**
      * @var array

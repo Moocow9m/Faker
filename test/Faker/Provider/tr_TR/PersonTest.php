@@ -10,10 +10,7 @@ use PHPUnit\Framework\TestCase;
 final class PersonTest extends TestCase
 {
 
-    /**
-     * @var Generator
-     */
-    private $faker;
+    private \Faker\Generator $faker;
 
     public function testTCNo()
     {

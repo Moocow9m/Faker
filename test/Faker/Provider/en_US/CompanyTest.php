@@ -9,10 +9,7 @@ use PHPUnit\Framework\TestCase;
 final class CompanyTest extends TestCase
 {
 
-    /**
-     * @var Generator
-     */
-    private $faker;
+    private \Faker\Generator $faker;
 
     /**
      * @link https://stackoverflow.com/questions/4242433/regex-for-ein-number-and-ssn-number-format-in-jquery/35471665#35471665

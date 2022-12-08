@@ -11,10 +11,7 @@ use PHPUnit\Framework\TestCase;
 final class InternetTest extends TestCase
 {
 
-    /**
-     * @var Generator
-     */
-    private $faker;
+    private \Faker\Generator $faker;
 
     public function testEmailIsValid()
     {

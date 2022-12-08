@@ -23,7 +23,7 @@ final class PersonTest extends TestCase
 
         $map = 'TRWAGMYFPDXBNJZSQVHLCKE';
 
-        list(, $number, $letter) = $matches;
+        [, $number, $letter] = $matches;
 
         return strtoupper($letter) === $map[((int)$number) % 23];
     }

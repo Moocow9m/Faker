@@ -31,7 +31,7 @@ class Company extends \Faker\Provider\Company
     public static function ein()
     {
         $prefix = static::randomElement(static::$einPrefixes);
-        $suffix = static::numberBetween(0, 9999999);
+        $suffix = static::numberBetween(0, 9_999_999);
 
         return sprintf("%02d-%07d", $prefix, $suffix);
     }
