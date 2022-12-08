@@ -1,7 +1,10 @@
 # Faker
 
-[![Monthly Downloads](https://poser.pugx.org/fzaninotto/faker/d/monthly.png)](https://packagist.org/packages/fzaninotto/faker)
-
+[![Latest Stable Version](http://poser.pugx.org/moocow9m/faker/v)](https://packagist.org/packages/moocow9m/faker)
+[![Total Downloads](http://poser.pugx.org/moocow9m/faker/downloads)](https://packagist.org/packages/moocow9m/faker)
+[![Latest Unstable Version](http://poser.pugx.org/moocow9m/faker/v/unstable)](https://packagist.org/packages/moocow9m/faker) 
+[![License](http://poser.pugx.org/moocow9m/faker/license)](https://packagist.org/packages/moocow9m/faker) 
+[![PHP Version Require](http://poser.pugx.org/moocow9m/faker/require/php)](https://packagist.org/packages/moocow9m/faker)
 Faker is a PHP library that generates fake data for you. Whether you need to bootstrap your database, create
 good-looking XML documents, fill-in your persistence to stress test it, or anonymize data taken from a production
 service, Faker is for you.
