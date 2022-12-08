@@ -11,13 +11,6 @@ final class CompanyTest extends TestCase
 {
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new Company($faker));
-        $this->faker = $faker;
-    }
-
     public function testSiretReturnsAValidSiret()
     {
         $siret = $this->faker->siret(false);
@@ -63,6 +56,13 @@ final class CompanyTest extends TestCase
     {
         $isCatchPhraseValid = TestableCompany::isCatchPhraseValid('La sécurité de rouler en toute simplicité');
         $this->assertTrue($isCatchPhraseValid);
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new Company($faker));
+        $this->faker = $faker;
     }
 }
 

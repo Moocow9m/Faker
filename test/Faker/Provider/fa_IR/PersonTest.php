@@ -2,8 +2,8 @@
 
 namespace Faker\Test\Provider\fa_IR;
 
-use Faker\Provider\fa_IR\Person;
 use Faker\Generator;
+use Faker\Provider\fa_IR\Person;
 use PHPUnit\Framework\TestCase;
 
 final class PersonTest extends TestCase
@@ -13,13 +13,6 @@ final class PersonTest extends TestCase
      * @var Generator
      */
     private $faker;
-
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new Person($faker));
-        $this->faker = $faker;
-    }
 
     public function testNationalCode()
     {
@@ -50,5 +43,12 @@ final class PersonTest extends TestCase
                 $this->assertEquals(11 - ($sum % 11), (int)$controlCode);
             }
         }
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new Person($faker));
+        $this->faker = $faker;
     }
 }

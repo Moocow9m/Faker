@@ -8,12 +8,41 @@ final class TextTest extends TestCase
 {
     private $textClass;
 
-    protected function setUp()
+    function testItShouldAppendEndPunctToTheEndOfString()
     {
-        $this->textClass = new \ReflectionClass('Faker\Provider\el_GR\Text');
+        $this->assertSame(
+            'ჭეშმარიტია. ჩვენც ისე.',
+            $this->getMethod('appendEnd')->invokeArgs(null, ['ჭეშმარიტია. ჩვენც ისე '])
+        );
+
+        $this->assertSame(
+            'ჭეშმარიტია. ჩვენც ისე.',
+            $this->getMethod('appendEnd')->invokeArgs(null, ['ჭეშმარიტია. ჩვენც ისე— '])
+        );
+
+        $this->assertSame(
+            'ჭეშმარიტია. ჩვენც ისე.',
+            $this->getMethod('appendEnd')->invokeArgs(null, ['ჭეშმარიტია. ჩვენც ისე,  '])
+        );
+
+        $this->assertSame(
+            'ჭეშმარიტია. ჩვენც ისე!.',
+            $this->getMethod('appendEnd')->invokeArgs(null, ['ჭეშმარიტია. ჩვენც ისე! '])
+        );
+
+        $this->assertSame(
+            'ჭეშმარიტია. ჩვენც ისე.',
+            $this->getMethod('appendEnd')->invokeArgs(null, ['ჭეშმარიტია. ჩვენც ისე; '])
+        );
+
+        $this->assertSame(
+            'ჭეშმარიტია. ჩვენც ისე.',
+            $this->getMethod('appendEnd')->invokeArgs(null, ['ჭეშმარიტია. ჩვენც ისე: '])
+        );
     }
 
-    protected function getMethod($name) {
+    protected function getMethod($name)
+    {
         $method = $this->textClass->getMethod($name);
 
         $method->setAccessible(true);
@@ -21,36 +50,8 @@ final class TextTest extends TestCase
         return $method;
     }
 
-    function testItShouldAppendEndPunctToTheEndOfString()
+    protected function setUp()
     {
-        $this->assertSame(
-            'ჭეშმარიტია. ჩვენც ისე.',
-            $this->getMethod('appendEnd')->invokeArgs(null, array('ჭეშმარიტია. ჩვენც ისე '))
-        );
-
-        $this->assertSame(
-            'ჭეშმარიტია. ჩვენც ისე.',
-            $this->getMethod('appendEnd')->invokeArgs(null, array('ჭეშმარიტია. ჩვენც ისე— '))
-        );
-
-        $this->assertSame(
-            'ჭეშმარიტია. ჩვენც ისე.',
-            $this->getMethod('appendEnd')->invokeArgs(null, array('ჭეშმარიტია. ჩვენც ისე,  '))
-        );
-
-        $this->assertSame(
-            'ჭეშმარიტია. ჩვენც ისე!.',
-            $this->getMethod('appendEnd')->invokeArgs(null, array('ჭეშმარიტია. ჩვენც ისე! '))
-        );
-
-        $this->assertSame(
-            'ჭეშმარიტია. ჩვენც ისე.',
-            $this->getMethod('appendEnd')->invokeArgs(null, array('ჭეშმარიტია. ჩვენც ისე; '))
-        );
-
-        $this->assertSame(
-            'ჭეშმარიტია. ჩვენც ისე.',
-            $this->getMethod('appendEnd')->invokeArgs(null, array('ჭეშმარიტია. ჩვენც ისე: '))
-        );
+        $this->textClass = new \ReflectionClass(\Faker\Provider\el_GR\Text::class);
     }
 }

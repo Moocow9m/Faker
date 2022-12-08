@@ -132,7 +132,7 @@ final class ProviderOverrideTest extends TestCase
     /**
      * @dataProvider localeDataProvider
      *
-     * @param null   $locale
+     * @param null $locale
      * @param string $locale
      */
     public function testUuid($locale = null)
@@ -149,12 +149,10 @@ final class ProviderOverrideTest extends TestCase
     public function localeDataProvider()
     {
         $locales = $this->getAllLocales();
-        $data = array();
+        $data = [];
 
         foreach ($locales as $locale) {
-            $data[] = array(
-                $locale
-            );
+            $data[] = [$locale];
         }
 
         return $data;
@@ -168,22 +166,22 @@ final class ProviderOverrideTest extends TestCase
      */
     private function getAllLocales()
     {
-        static $locales = array();
+        static $locales = [];
 
-        if ( ! empty($locales)) {
+        if (!empty($locales)) {
             return $locales;
         }
 
         // Finding all PHP files in the xx_XX directories
-        $providerDir = __DIR__ .'/../../../src/Faker/Provider';
-        foreach (glob($providerDir .'/*_*/*.php') as $file) {
+        $providerDir = __DIR__ . '/../../../src/Faker/Provider';
+        foreach (glob($providerDir . '/*_*/*.php') as $file) {
             $localisation = basename(dirname($file));
 
-            if (isset($locales[ $localisation ])) {
+            if (isset($locales[$localisation])) {
                 continue;
             }
 
-            $locales[ $localisation ] = $localisation;
+            $locales[$localisation] = $localisation;
         }
 
         return $locales;

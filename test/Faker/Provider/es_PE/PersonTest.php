@@ -13,17 +13,17 @@ final class PersonTest extends TestCase
      */
     private $faker;
 
+    public function testDNI()
+    {
+        $dni = $this->faker->dni;
+        $this->assertRegExp('/\A[0-9]{8}\Z/', $dni);
+    }
+
     protected function setUp()
     {
         $faker = new Generator();
         $faker->seed(1);
         $faker->addProvider(new Person($faker));
         $this->faker = $faker;
-    }
-
-    public function testDNI()
-    {
-        $dni = $this->faker->dni;
-        $this->assertRegExp('/\A[0-9]{8}\Z/', $dni);
     }
 }

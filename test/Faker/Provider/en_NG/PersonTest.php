@@ -8,17 +8,10 @@ use PHPUnit\Framework\TestCase;
 
 final class PersonTest extends TestCase
 {
-     /**
+    /**
      * @var Generator
      */
     private $faker;
-
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new Person($faker));
-        $this->faker = $faker;
-    }
 
     public function testPersonNameIsAValidString()
     {
@@ -26,5 +19,12 @@ final class PersonTest extends TestCase
 
         $this->assertNotEmpty($name);
         $this->assertInternalType('string', $name);
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new Person($faker));
+        $this->faker = $faker;
     }
 }

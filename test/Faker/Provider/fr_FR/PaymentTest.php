@@ -11,13 +11,6 @@ final class PaymentTest extends TestCase
 {
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new Payment($faker));
-        $this->faker = $faker;
-    }
-
     public function testFormattedVat()
     {
         $vat = $this->faker->vat(true);
@@ -27,9 +20,9 @@ final class PaymentTest extends TestCase
         $siren = substr($vat, 4, 12);
         $this->assertTrue(Luhn::isValid($siren));
 
-        $key = (int) substr($siren, 2, 2);
+        $key = (int)substr($siren, 2, 2);
         if ($key === 0) {
-            $this->assertEqual($key, (12 + 3 * ($siren % 97)) % 97);            
+            $this->assertEqual($key, (12 + 3 * ($siren % 97)) % 97);
         }
     }
 
@@ -41,9 +34,16 @@ final class PaymentTest extends TestCase
         $siren = substr($vat, 4, 12);
         $this->assertTrue(Luhn::isValid($siren));
 
-        $key = (int) substr($siren, 2, 2);
+        $key = (int)substr($siren, 2, 2);
         if ($key === 0) {
-            $this->assertEqual($key, (12 + 3 * ($siren % 97)) % 97);            
+            $this->assertEqual($key, (12 + 3 * ($siren % 97)) % 97);
         }
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new Payment($faker));
+        $this->faker = $faker;
     }
 }

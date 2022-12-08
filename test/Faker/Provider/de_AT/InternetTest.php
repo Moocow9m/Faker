@@ -3,9 +3,9 @@
 namespace Faker\Test\Provider\de_AT;
 
 use Faker\Generator;
-use Faker\Provider\de_AT\Person;
-use Faker\Provider\de_AT\Internet;
 use Faker\Provider\de_AT\Company;
+use Faker\Provider\de_AT\Internet;
+use Faker\Provider\de_AT\Person;
 use PHPUnit\Framework\TestCase;
 
 final class InternetTest extends TestCase
@@ -16,6 +16,12 @@ final class InternetTest extends TestCase
      */
     private $faker;
 
+    public function testEmailIsValid()
+    {
+        $email = $this->faker->email();
+        $this->assertNotFalse(filter_var($email, FILTER_VALIDATE_EMAIL));
+    }
+
     protected function setUp()
     {
         $faker = new Generator();
@@ -23,11 +29,5 @@ final class InternetTest extends TestCase
         $faker->addProvider(new Internet($faker));
         $faker->addProvider(new Company($faker));
         $this->faker = $faker;
-    }
-
-    public function testEmailIsValid()
-    {
-        $email = $this->faker->email();
-        $this->assertNotFalse(filter_var($email, FILTER_VALIDATE_EMAIL));
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Faker\ORM\Doctrine;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
+use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * Service class for populating a table through a Doctrine Entity class.
@@ -17,11 +17,11 @@ class EntityPopulator
     /**
      * @var array
      */
-    protected $columnFormatters = array();
+    protected $columnFormatters = [];
     /**
      * @var array
      */
-    protected $modifiers = array();
+    protected $modifiers = [];
 
     /**
      * Class constructor.
@@ -42,14 +42,6 @@ class EntityPopulator
     }
 
     /**
-     * @param $columnFormatters
-     */
-    public function setColumnFormatters($columnFormatters)
-    {
-        $this->columnFormatters = $columnFormatters;
-    }
-
-    /**
      * @return array
      */
     public function getColumnFormatters()
@@ -57,25 +49,17 @@ class EntityPopulator
         return $this->columnFormatters;
     }
 
+    /**
+     * @param $columnFormatters
+     */
+    public function setColumnFormatters($columnFormatters)
+    {
+        $this->columnFormatters = $columnFormatters;
+    }
+
     public function mergeColumnFormattersWith($columnFormatters)
     {
         $this->columnFormatters = array_merge($this->columnFormatters, $columnFormatters);
-    }
-
-    /**
-     * @param array $modifiers
-     */
-    public function setModifiers(array $modifiers)
-    {
-        $this->modifiers = $modifiers;
-    }
-
-    /**
-     * @return array
-     */
-    public function getModifiers()
-    {
-        return $this->modifiers;
     }
 
     /**
@@ -92,7 +76,7 @@ class EntityPopulator
      */
     public function guessColumnFormatters(\Faker\Generator $generator)
     {
-        $formatters = array();
+        $formatters = [];
         $nameGuesser = new \Faker\Guesser\Name($generator);
         $columnTypeGuesser = new ColumnTypeGuesser($generator);
         foreach ($this->class->getFieldNames() as $fieldName) {
@@ -211,7 +195,7 @@ class EntityPopulator
                 }
                 // Try a standard setter if it's available, otherwise fall back on reflection
                 $setter = sprintf("set%s", ucfirst($field));
-                if (is_callable(array($obj, $setter))) {
+                if (is_callable([$obj, $setter])) {
                     $obj->$setter($value);
                 } else {
                     $this->class->reflFields[$field]->setValue($obj, $value);
@@ -228,6 +212,22 @@ class EntityPopulator
     }
 
     /**
+     * @return array
+     */
+    public function getModifiers()
+    {
+        return $this->modifiers;
+    }
+
+    /**
+     * @param array $modifiers
+     */
+    public function setModifiers(array $modifiers)
+    {
+        $this->modifiers = $modifiers;
+    }
+
+    /**
      * @param ObjectManager $manager
      * @return int|null
      */
@@ -236,9 +236,9 @@ class EntityPopulator
         /* @var $repository \Doctrine\Common\Persistence\ObjectRepository */
         $repository = $manager->getRepository(get_class($obj));
         $result = $repository->createQueryBuilder('e')
-                ->select(sprintf('e.%s', $column))
-                ->getQuery()
-                ->execute();
+            ->select(sprintf('e.%s', $column))
+            ->getQuery()
+            ->execute();
         $ids = array_map('current', $result->toArray());
 
         $id = null;

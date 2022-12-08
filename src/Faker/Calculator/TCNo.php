@@ -7,6 +7,17 @@ use InvalidArgumentException;
 class TCNo
 {
     /**
+     * Checks whether a TCNo has a valid checksum
+     *
+     * @param string $tcNo
+     * @return boolean
+     */
+    public static function isValid($tcNo)
+    {
+        return self::checksum(substr($tcNo, 0, -2)) === substr($tcNo, -2, 2);
+    }
+
+    /**
      * Generates Turkish Identity Number Checksum
      * Gets first 9 digit as prefix and calculates checksum
      *
@@ -37,16 +48,5 @@ class TCNo
         $eleventhDigit = ($evenSum + $oddSum + $tenthDigit) % 10;
 
         return $tenthDigit . $eleventhDigit;
-    }
-
-    /**
-     * Checks whether a TCNo has a valid checksum
-     *
-     * @param string $tcNo
-     * @return boolean
-     */
-    public static function isValid($tcNo)
-    {
-        return self::checksum(substr($tcNo, 0, -2)) === substr($tcNo, -2, 2);
     }
 }

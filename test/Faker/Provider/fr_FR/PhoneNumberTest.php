@@ -13,13 +13,6 @@ final class PhoneNumberTest extends TestCase
      */
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new PhoneNumber($faker));
-        $this->faker = $faker;
-    }
-
     public function testMobileNumber()
     {
         $mobileNumber = $this->faker->mobileNumber();
@@ -54,5 +47,12 @@ final class PhoneNumberTest extends TestCase
     {
         $serviceNumberFormat = $this->faker->phoneNumber08WithSeparator();
         $this->assertRegExp('/^((0|1|2)\d{1}|9[^46])( \d{2}){3}$/', $serviceNumberFormat);
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new PhoneNumber($faker));
+        $this->faker = $faker;
     }
 }

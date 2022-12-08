@@ -13,13 +13,6 @@ final class CompanyTest extends TestCase
      */
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new Company($faker));
-        $this->faker = $faker;
-    }
-
     public function testINN()
     {
         $this->assertRegExp('/^[0-9]{10}$/', $this->faker->inn);
@@ -42,5 +35,12 @@ final class CompanyTest extends TestCase
         $this->assertGreaterThanOrEqual(3,
             count(explode(' ', $this->faker->catchPhrase)),
             "'$phrase' - should be contain 3 word");
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new Company($faker));
+        $this->faker = $faker;
     }
 }

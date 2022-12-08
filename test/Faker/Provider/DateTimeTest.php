@@ -7,17 +7,6 @@ use PHPUnit\Framework\TestCase;
 
 final class DateTimeTest extends TestCase
 {
-    protected function setUp()
-    {
-        $this->defaultTz = 'UTC';
-        DateTimeProvider::setDefaultTimezone($this->defaultTz);
-    }
-
-    protected function tearDown()
-    {
-        DateTimeProvider::setDefaultTimezone();
-    }
-
     public function testPreferDefaultTimezoneOverSystemTimezone()
     {
         /**
@@ -197,12 +186,7 @@ final class DateTimeTest extends TestCase
 
     public function providerDateTimeBetween()
     {
-        return array(
-            array('-1 year', false),
-            array('-1 year', null),
-            array('-1 day', '-1 hour'),
-            array('-1 day', 'now'),
-        );
+        return [['-1 year', false], ['-1 year', null], ['-1 day', '-1 hour'], ['-1 day', 'now']];
     }
 
     /**
@@ -227,11 +211,7 @@ final class DateTimeTest extends TestCase
 
     public function providerDateTimeInInterval()
     {
-        return array(
-            array('-1 year', '+5 days', true),
-            array('-1 day', '-1 hour', false),
-            array('-1 day', '+1 hour', true),
-        );
+        return [['-1 year', '+5 days', true], ['-1 day', '-1 hour', false], ['-1 day', '+1 hour', true]];
     }
 
     public function testFixedSeedWithMaximumTimestamp()
@@ -278,5 +258,16 @@ final class DateTimeTest extends TestCase
         $this->assertEquals($year, DateTimeProvider::year($max));
         $this->assertEquals($dateTimeThisYear, DateTimeProvider::dateTimeThisYear($max));
         mt_srand();
+    }
+
+    protected function setUp()
+    {
+        $this->defaultTz = 'UTC';
+        DateTimeProvider::setDefaultTimezone($this->defaultTz);
+    }
+
+    protected function tearDown()
+    {
+        DateTimeProvider::setDefaultTimezone();
     }
 }

@@ -8,13 +8,6 @@ use PHPUnit\Framework\TestCase;
 
 final class AddressTest extends TestCase
 {
-    protected function setUp()
-    {
-        $faker = Factory::create('en_SG');
-        $faker->addProvider(new Address($faker));
-        $this->faker = $faker;
-    }
-
     public function testStreetNumber()
     {
         $this->assertRegExp('/^\d{2,3}$/', $this->faker->streetNumber());
@@ -23,5 +16,12 @@ final class AddressTest extends TestCase
     public function testBlockNumber()
     {
         $this->assertRegExp('/^Blk\s*\d{2,3}[A-H]*$/i', $this->faker->blockNumber());
+    }
+
+    protected function setUp()
+    {
+        $faker = Factory::create('en_SG');
+        $faker->addProvider(new Address($faker));
+        $this->faker = $faker;
     }
 }

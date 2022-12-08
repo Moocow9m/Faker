@@ -10,13 +10,6 @@ final class PersonTest extends TestCase
 {
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new Person($faker));
-        $this->faker = $faker;
-    }
-
     public function testGenerateValidIdNumber()
     {
         $idNumber = $this->faker->idNumber();
@@ -29,5 +22,12 @@ final class PersonTest extends TestCase
             $sum += $multiplier * $val;
         }
         $this->assertTrue($sum != 0 && $sum % 11 == 0);
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new Person($faker));
+        $this->faker = $faker;
     }
 }

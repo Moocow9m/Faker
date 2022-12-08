@@ -8,13 +8,6 @@ use PHPUnit\Framework\TestCase;
 
 final class PersonTest extends TestCase
 {
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new Person($faker));
-        $this->faker = $faker;
-    }
-
     public function testIfFirstNameMaleCanReturnData()
     {
         $firstNameMale = $this->faker->firstNameMale();
@@ -26,5 +19,13 @@ final class PersonTest extends TestCase
         $firstNameFemale = $this->faker->firstNameFemale();
         $this->assertNotEmpty($firstNameFemale);
     }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new Person($faker));
+        $this->faker = $faker;
+    }
 }
+
 ?>

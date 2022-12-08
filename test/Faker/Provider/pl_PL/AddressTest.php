@@ -12,13 +12,6 @@ final class AddressTest extends TestCase
      */
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new Address($faker));
-        $this->faker = $faker;
-    }
-
     /**
      * Test the validity of state
      */
@@ -28,5 +21,12 @@ final class AddressTest extends TestCase
         $this->assertNotEmpty($state);
         $this->assertInternalType('string', $state);
         $this->assertRegExp('/[a-z]+/', $state);
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new Address($faker));
+        $this->faker = $faker;
     }
 }

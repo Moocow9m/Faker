@@ -13,13 +13,6 @@ final class PaymentTest extends TestCase
      */
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new Payment($faker));
-        $this->faker = $faker;
-    }
-
     public function testVAT()
     {
         $vat = $this->faker->vat();
@@ -41,8 +34,8 @@ final class PaymentTest extends TestCase
     function isValidCIFFormat($docNumber)
     {
         return $this->respectsDocPattern($docNumber, '/^[PQSNWR][0-9][0-9][0-9][0-9][0-9][0-9][0-9][A-Z0-9]/')
-                ||
-               $this->respectsDocPattern($docNumber, '/^[ABCDEFGHJUV][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/');
+            ||
+            $this->respectsDocPattern($docNumber, '/^[ABCDEFGHJUV][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/');
     }
 
     function respectsDocPattern($givenString, $pattern)
@@ -56,6 +49,13 @@ final class PaymentTest extends TestCase
             $isValid = TRUE;
         }
         return $isValid;
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new Payment($faker));
+        $this->faker = $faker;
     }
 
 }

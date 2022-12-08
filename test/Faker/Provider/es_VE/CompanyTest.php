@@ -13,14 +13,6 @@ final class CompanyTest extends TestCase
      */
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->seed(1);
-        $faker->addProvider(new Company($faker));
-        $this->faker = $faker;
-    }
-
     /**
      * national Id format validator
      */
@@ -32,6 +24,14 @@ final class CompanyTest extends TestCase
 
         $rif = $this->faker->taxpayerIdentificationNumber('-');
         $this->assertRegExp($pattern, $rif);
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->seed(1);
+        $faker->addProvider(new Company($faker));
+        $this->faker = $faker;
     }
 
 

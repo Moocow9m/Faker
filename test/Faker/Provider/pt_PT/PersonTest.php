@@ -9,13 +9,6 @@ use PHPUnit\Framework\TestCase;
 final class PersonTest extends TestCase
 {
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new Person($faker));
-        $this->faker = $faker;
-    }
-
     public function testTaxpayerIdentificationNumberIsValid()
     {
         $tin = $this->faker->taxpayerIdentificationNumber();
@@ -49,5 +42,12 @@ final class PersonTest extends TestCase
         }
 
         return false;
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new Person($faker));
+        $this->faker = $faker;
     }
 }

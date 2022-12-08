@@ -14,13 +14,6 @@ final class PhoneNumberTest extends TestCase
      */
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new PhoneNumber($faker));
-        $this->faker = $faker;
-    }
-
     public function testPhoneNumberFormat()
     {
         $pattern = "/((\+38)(((\(\d{3}\))\d{7}|(\(\d{4}\))\d{6})|(\d{8})))|0\d{9}/";
@@ -31,6 +24,13 @@ final class PhoneNumberTest extends TestCase
             'Phone number format ' . $phoneNumber . ' is wrong!'
         );
 
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new PhoneNumber($faker));
+        $this->faker = $faker;
     }
 
 }

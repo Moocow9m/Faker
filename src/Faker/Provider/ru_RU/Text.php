@@ -4,13 +4,6 @@ namespace Faker\Provider\ru_RU;
 
 class Text extends \Faker\Provider\Text
 {
-    public function realText($maxNbChars = 200, $indexSize = 2)
-    {
-        $realText = parent::realText($maxNbChars, $indexSize);
-
-        return iconv('UTF-8', 'UTF-8//IGNORE', $realText);
-    }
-    
     /**
      * From ru.wikisource.org
      *
@@ -4202,6 +4195,13 @@ class Text extends \Faker\Provider\Text
 кипело и животрепетало, как метко сказанное русское слово.
 
 EOT;
+
+    public function realText($maxNbChars = 200, $indexSize = 2)
+    {
+        $realText = parent::realText($maxNbChars, $indexSize);
+
+        return iconv('UTF-8', 'UTF-8//IGNORE', $realText);
+    }
 
     /*
     *** START: FULL LICENSE ***

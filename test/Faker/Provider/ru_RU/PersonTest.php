@@ -13,13 +13,6 @@ final class PersonTest extends TestCase
      */
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new Person($faker));
-        $this->faker = $faker;
-    }
-
     public function testLastNameFemale()
     {
         $this->assertEquals("а", substr($this->faker->lastName('female'), -2, 2));
@@ -33,5 +26,12 @@ final class PersonTest extends TestCase
     public function testLastNameRandom()
     {
         $this->assertNotNull($this->faker->lastName());
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new Person($faker));
+        $this->faker = $faker;
     }
 }

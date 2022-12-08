@@ -15,10 +15,10 @@ assignees: ''
 
 <!-- Please provide the versions of PHP as well as `fzaninotto/faker` on which the issue has been observed -->
 
-|                     | Version |
-|:--------------------|:--------|
-| PHP                 | x.y.z   |
-| `fzaninotto/faker`  | x.y.z   |
+|                    | Version |
+|:-------------------|:--------|
+| PHP                | x.y.z   |
+| `fzaninotto/faker` | x.y.z   |
 
 ### Self-enclosed code snippet for reproduction
 

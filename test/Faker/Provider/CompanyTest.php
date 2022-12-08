@@ -14,18 +14,18 @@ final class CompanyTest extends TestCase
      */
     private $faker;
 
+    public function testJobTitle()
+    {
+        $jobTitle = $this->faker->jobTitle();
+        $pattern = '/^[A-Za-z]+$/';
+        $this->assertRegExp($pattern, $jobTitle);
+    }
+
     protected function setUp()
     {
         $faker = new Generator();
         $faker->addProvider(new Company($faker));
         $faker->addProvider(new Lorem($faker));
         $this->faker = $faker;
-    }
-
-    public function testJobTitle()
-    {
-        $jobTitle = $this->faker->jobTitle();
-        $pattern = '/^[A-Za-z]+$/';
-        $this->assertRegExp($pattern, $jobTitle);
     }
 }

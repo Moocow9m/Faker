@@ -15,13 +15,6 @@ final class AddressTest extends TestCase
      */
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new Address($faker));
-        $this->faker = $faker;
-    }
-
     public function testPostCodeIsValid()
     {
         $main = '[1-9]{1}[0-9]{2}[0,1,4,5,9]{1}';
@@ -36,5 +29,12 @@ final class AddressTest extends TestCase
 
         $address = $this->faker->address();
         $this->assertFalse(strstr($address, "\n"));
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new Address($faker));
+        $this->faker = $faker;
     }
 }

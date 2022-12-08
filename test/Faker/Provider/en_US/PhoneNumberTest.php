@@ -14,13 +14,6 @@ final class PhoneNumberTest extends TestCase
      */
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new PhoneNumber($faker));
-        $this->faker = $faker;
-    }
-
     public function testPhoneNumber()
     {
         for ($i = 0; $i < 100; $i++) {
@@ -52,7 +45,7 @@ final class PhoneNumberTest extends TestCase
 
     public function testTollFreeAreaCode()
     {
-        $this->assertContains($this->faker->tollFreeAreaCode, array(800, 822, 833, 844, 855, 866, 877, 888, 880, 887, 889));
+        $this->assertContains($this->faker->tollFreeAreaCode, [800, 822, 833, 844, 855, 866, 877, 888, 880, 887, 889]);
     }
 
     public function testTollFreePhoneNumber()
@@ -71,7 +64,7 @@ final class PhoneNumberTest extends TestCase
             $this->assertCount(10, $digits);
 
             $areaCode = $digits[0] . $digits[1] . $digits[2];
-            $this->assertContains($areaCode, array('800', '822', '833', '844', '855', '866', '877', '888', '880', '887', '889'));
+            $this->assertContains($areaCode, ['800', '822', '833', '844', '855', '866', '877', '888', '880', '887', '889']);
 
             // Last two digits of exchange code cannot be 1
             if ($digits[4] === 1) {
@@ -81,5 +74,12 @@ final class PhoneNumberTest extends TestCase
             // Test format
             $this->assertRegExp('/^(\+?1)?([ -.]*\d{3}[ -.]*| *\(\d{3}\) *)\d{3}[-.]?\d{4}$/', $number);
         }
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new PhoneNumber($faker));
+        $this->faker = $faker;
     }
 }

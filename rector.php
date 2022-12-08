@@ -14,8 +14,8 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->skip(
         [
-            __DIR__.'/vendor',
-            __DIR__.'/.idea',
+            __DIR__ . '/vendor',
+            __DIR__ . '/.idea',
         ]
     );
 
@@ -25,7 +25,7 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->sets(
         [
-            LevelSetList::UP_TO_PHP_74,
+            LevelSetList::UP_TO_PHP_56,
         ]
     );
 };

@@ -4,20 +4,26 @@ namespace Faker\Provider;
 
 class Company extends Base
 {
-    protected static $formats = array(
-        '{{lastName}} {{companySuffix}}',
-    );
+    protected static $formats = ['{{lastName}} {{companySuffix}}'];
 
-    protected static $companySuffix = array('Ltd');
+    protected static $companySuffix = ['Ltd'];
 
-    protected static $jobTitleFormat = array(
-        '{{word}}',
-    );
+    protected static $jobTitleFormat = ['{{word}}'];
 
     /**
+     * @return string
+     * @example 'Ltd'
+     *
+     */
+    public static function companySuffix()
+    {
+        return static::randomElement(static::$companySuffix);
+    }
+
+    /**
+     * @return string
      * @example 'Acme Ltd'
      *
-     * @return string
      */
     public function company()
     {
@@ -27,19 +33,9 @@ class Company extends Base
     }
 
     /**
-     * @example 'Ltd'
-     *
      * @return string
-     */
-    public static function companySuffix()
-    {
-        return static::randomElement(static::$companySuffix);
-    }
-
-    /**
      * @example 'Job'
      *
-     * @return string
      */
     public function jobTitle()
     {

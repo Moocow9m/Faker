@@ -10,16 +10,6 @@ final class PhoneNumberTest extends TestCase
 {
     private $faker;
 
-    protected function setUp()
-    {
-        $this->faker = Factory::create('en_SG');
-        $this->faker->seed(1);
-        $this->faker->addProvider(new PhoneNumber($this->faker));
-    }
-
-    // http://en.wikipedia.org/wiki/Telephone_numbers_in_Singapore#Numbering_plan
-    // x means 0 to 9
-    // y means 0 to 8 only
     public function testMobilePhoneNumberStartWith9Returns9yxxxxxx()
     {
         $startsWith9 = false;
@@ -33,7 +23,8 @@ final class PhoneNumberTest extends TestCase
 
     // http://en.wikipedia.org/wiki/Telephone_numbers_in_Singapore#Numbering_plan
     // x means 0 to 9
-    // z means 1 to 8 only
+    // y means 0 to 8 only
+
     public function testMobilePhoneNumberStartWith8Returns8zxxxxxx()
     {
         $startsWith8 = false;
@@ -42,5 +33,16 @@ final class PhoneNumberTest extends TestCase
             $startsWith8 = preg_match('/^(\+65|65)?\s*8/', $mobileNumber);
         }
         $this->assertRegExp('/^(\+65|65)?\s*8\s*[1-8]\d{2}\s*\d{4}$/', $mobileNumber);
+    }
+
+    // http://en.wikipedia.org/wiki/Telephone_numbers_in_Singapore#Numbering_plan
+    // x means 0 to 9
+    // z means 1 to 8 only
+
+    protected function setUp()
+    {
+        $this->faker = Factory::create('en_SG');
+        $this->faker->seed(1);
+        $this->faker->addProvider(new PhoneNumber($this->faker));
     }
 }

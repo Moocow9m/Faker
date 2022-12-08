@@ -14,13 +14,6 @@ final class AddressTest extends TestCase
      */
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new Address($faker));
-        $this->faker = $faker;
-    }
-
     public function testPostCodeIsValid()
     {
         $main = '[0-9]{5}';
@@ -77,5 +70,12 @@ final class AddressTest extends TestCase
             1,
             'Country name ' . $country . ' is wrong!'
         );
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new Address($faker));
+        $this->faker = $faker;
     }
 }

@@ -10,14 +10,6 @@ final class BarcodeTest extends TestCase
 {
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new Barcode($faker));
-        $faker->seed(0);
-        $this->faker = $faker;
-    }
-
     public function testEan8()
     {
         $code = $this->faker->ean8();
@@ -34,6 +26,14 @@ final class BarcodeTest extends TestCase
         $codeWithoutChecksum = substr($code, 0, -1);
         $checksum = substr($code, -1);
         $this->assertEquals(TestableBarcode::eanChecksum($codeWithoutChecksum), $checksum);
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new Barcode($faker));
+        $faker->seed(0);
+        $this->faker = $faker;
     }
 }
 

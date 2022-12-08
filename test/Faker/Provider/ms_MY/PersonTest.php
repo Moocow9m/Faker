@@ -13,13 +13,6 @@ final class PersonTest extends TestCase
      */
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new Person($faker));
-        $this->faker = $faker;
-    }
-
     /**
      * @link https://en.wikipedia.org/wiki/Malaysian_identity_card#Structure_of_the_National_Registration_Identity_Card_Number_(NRIC)
      */
@@ -46,5 +39,12 @@ final class PersonTest extends TestCase
         $nnnn = substr($myKadNumber, 8, 4);
         //match any number from 0000-9999
         $this->assertRegExp("/^[0-9]{4}$/", $nnnn);
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new Person($faker));
+        $this->faker = $faker;
     }
 }

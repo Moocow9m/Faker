@@ -14,15 +14,6 @@ final class AddressTest extends TestCase
      */
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-
-        $faker->addProvider(new Address($faker));
-
-        $this->faker = $faker;
-    }
-
     /**
      * @see https://en.wikipedia.org/wiki/List_of_postal_codes_in_Austria
      */
@@ -31,5 +22,14 @@ final class AddressTest extends TestCase
         $postcode = $this->faker->postcode;
 
         $this->assertRegExp('/^[1-9]\d{3}$/', $postcode);
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+
+        $faker->addProvider(new Address($faker));
+
+        $this->faker = $faker;
     }
 }

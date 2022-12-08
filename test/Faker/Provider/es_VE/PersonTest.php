@@ -14,14 +14,6 @@ final class PersonTest extends TestCase
      */
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->seed(1);
-        $faker->addProvider(new Person($faker));
-        $this->faker = $faker;
-    }
-
     /**
      * national Id format validator
      */
@@ -34,5 +26,13 @@ final class PersonTest extends TestCase
 
         $cedula = $this->faker->nationalId('-');
         $this->assertRegExp($pattern, $cedula);
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->seed(1);
+        $faker->addProvider(new Person($faker));
+        $this->faker = $faker;
     }
 }

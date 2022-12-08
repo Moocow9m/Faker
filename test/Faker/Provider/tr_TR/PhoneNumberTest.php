@@ -14,13 +14,6 @@ final class PhoneNumberTest extends TestCase
      */
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new PhoneNumber($faker));
-        $this->faker = $faker;
-    }
-
     public function testPhoneNumber()
     {
         for ($i = 0; $i < 100; $i++) {
@@ -30,5 +23,12 @@ final class PhoneNumberTest extends TestCase
 
             $this->assertGreaterThan(10, count($digits));
         }
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new PhoneNumber($faker));
+        $this->faker = $faker;
     }
 }

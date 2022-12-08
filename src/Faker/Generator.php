@@ -26,8 +26,8 @@ namespace Faker;
  * @property string $address
  * @property string $state
  * @property string $country
- * @property float  $latitude
- * @property float  $longitude
+ * @property float $latitude
+ * @property float $longitude
  *
  * @property string $ean13
  * @property string $ean8
@@ -91,22 +91,22 @@ namespace Faker;
  * @property string $localIpv4
  * @property string $macAddress
  *
- * @property int       $unixTime
+ * @property int $unixTime
  * @property \DateTime $dateTime
  * @property \DateTime $dateTimeAD
- * @property string    $iso8601
+ * @property string $iso8601
  * @property \DateTime $dateTimeThisCentury
  * @property \DateTime $dateTimeThisDecade
  * @property \DateTime $dateTimeThisYear
  * @property \DateTime $dateTimeThisMonth
- * @property string    $amPm
- * @property string    $dayOfMonth
- * @property string    $dayOfWeek
- * @property string    $month
- * @property string    $monthName
- * @property string    $year
- * @property string    $century
- * @property string    $timezone
+ * @property string $amPm
+ * @property string $dayOfMonth
+ * @property string $dayOfWeek
+ * @property string $month
+ * @property string $monthName
+ * @property string $year
+ * @property string $century
+ * @property string $timezone
  * @method string amPm($max = 'now')
  * @method string date($format = 'Y-m-d', $max = 'now')
  * @method string dayOfMonth($max = 'now')
@@ -137,9 +137,9 @@ namespace Faker;
  * @property boolean $boolean
  * @method boolean boolean($chanceOfGettingTrue = 50)
  *
- * @property int    $randomDigit
- * @property int    $randomDigitNot
- * @property int    $randomDigitNotNull
+ * @property int $randomDigit
+ * @property int $randomDigitNot
+ * @property int $randomDigitNotNull
  * @property string $randomLetter
  * @property string $randomAscii
  * @method int randomNumber($nbDigits = null, $strict = false)
@@ -199,8 +199,8 @@ namespace Faker;
  */
 class Generator
 {
-    protected $providers = array();
-    protected $formatters = array();
+    protected $providers = [];
+    protected $formatters = [];
 
     public function addProvider($provider)
     {
@@ -212,58 +212,15 @@ class Generator
         return $this->providers;
     }
 
-    public function seed($seed = null)
-    {
-        if ($seed === null) {
-            mt_srand();
-        } else {
-            if (PHP_VERSION_ID < 70100) {
-                mt_srand((int) $seed);
-            } else {
-                mt_srand((int) $seed, MT_RAND_PHP);
-            }
-        }
-    }
-
-    public function format($formatter, $arguments = array())
-    {
-        return call_user_func_array($this->getFormatter($formatter), $arguments);
-    }
-
-    /**
-     * @param string $formatter
-     *
-     * @return Callable
-     */
-    public function getFormatter($formatter)
-    {
-        if (isset($this->formatters[$formatter])) {
-            return $this->formatters[$formatter];
-        }
-        foreach ($this->providers as $provider) {
-            if (method_exists($provider, $formatter)) {
-                $this->formatters[$formatter] = array($provider, $formatter);
-
-                return $this->formatters[$formatter];
-            }
-        }
-        throw new \InvalidArgumentException(sprintf('Unknown formatter "%s"', $formatter));
-    }
-
     /**
      * Replaces tokens ('{{ tokenName }}') with the result from the token method call
      *
-     * @param  string $string String that needs to bet parsed
+     * @param string $string String that needs to bet parsed
      * @return string
      */
     public function parse($string)
     {
-        return preg_replace_callback('/\{\{\s?(\w+)\s?\}\}/u', array($this, 'callFormatWithMatches'), $string);
-    }
-
-    protected function callFormatWithMatches($matches)
-    {
-        return $this->format($matches[1]);
+        return preg_replace_callback('/\{\{\s?(\w+)\s?\}\}/u', [$this, 'callFormatWithMatches'], $string);
     }
 
     /**
@@ -292,8 +249,51 @@ class Generator
         $this->seed();
     }
 
+    public function seed($seed = null)
+    {
+        if ($seed === null) {
+            mt_srand();
+        } else {
+            if (PHP_VERSION_ID < 70100) {
+                mt_srand((int)$seed);
+            } else {
+                mt_srand((int)$seed, MT_RAND_PHP);
+            }
+        }
+    }
+
     public function __wakeup()
     {
         $this->formatters = [];
+    }
+
+    protected function callFormatWithMatches($matches)
+    {
+        return $this->format($matches[1]);
+    }
+
+    public function format($formatter, $arguments = [])
+    {
+        return call_user_func_array($this->getFormatter($formatter), $arguments);
+    }
+
+    /**
+     * @param string $formatter
+     *
+     * @return Callable
+     */
+    public function getFormatter($formatter)
+    {
+        if (isset($this->formatters[$formatter])) {
+            return $this->formatters[$formatter];
+        }
+        foreach ($this->providers as $provider) {
+            if (method_exists($provider, $formatter)) {
+                $this->formatters[$formatter] = [$provider, $formatter];
+
+                return $this->formatters[$formatter];
+            }
+        }
+        throw new \InvalidArgumentException(sprintf('Unknown formatter "%s"', $formatter));
     }
 }

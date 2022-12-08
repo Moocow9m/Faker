@@ -2,8 +2,8 @@
 
 namespace Faker\Test\Provider\en_US;
 
-use Faker\Provider\en_US\Person;
 use Faker\Generator;
+use Faker\Provider\en_US\Person;
 use PHPUnit\Framework\TestCase;
 
 final class PersonTest extends TestCase
@@ -13,13 +13,6 @@ final class PersonTest extends TestCase
      * @var Generator
      */
     private $faker;
-
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new Person($faker));
-        $this->faker = $faker;
-    }
 
     public function testSsn()
     {
@@ -44,5 +37,12 @@ final class PersonTest extends TestCase
             $this->assertGreaterThan(0, $parts[2]);
             $this->assertLessThan(10000, $parts[2]);
         }
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new Person($faker));
+        $this->faker = $faker;
     }
 }

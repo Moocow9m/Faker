@@ -13,13 +13,6 @@ final class PersonTest extends TestCase
      */
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new Person($faker));
-        $this->faker = $faker;
-    }
-
     public function testPeselLenght()
     {
         $pesel = $this->faker->pesel();
@@ -29,7 +22,7 @@ final class PersonTest extends TestCase
 
     public function testPeselDate()
     {
-        $date  = new DateTime('1990-01-01');
+        $date = new DateTime('1990-01-01');
         $pesel = $this->faker->pesel($date);
 
         $this->assertEquals('90', substr($pesel, 0, 2));
@@ -39,7 +32,7 @@ final class PersonTest extends TestCase
 
     public function testPeselDateWithYearAfter2000()
     {
-        $date  = new DateTime('2001-01-01');
+        $date = new DateTime('2001-01-01');
         $pesel = $this->faker->pesel($date);
 
         $this->assertEquals('01', substr($pesel, 0, 2));
@@ -49,7 +42,7 @@ final class PersonTest extends TestCase
 
     public function testPeselDateWithYearAfter2100()
     {
-        $date  = new DateTime('2101-01-01');
+        $date = new DateTime('2101-01-01');
         $pesel = $this->faker->pesel($date);
 
         $this->assertEquals('01', substr($pesel, 0, 2));
@@ -59,7 +52,7 @@ final class PersonTest extends TestCase
 
     public function testPeselDateWithYearAfter2200()
     {
-        $date  = new DateTime('2201-01-01');
+        $date = new DateTime('2201-01-01');
         $pesel = $this->faker->pesel($date);
 
         $this->assertEquals('01', substr($pesel, 0, 2));
@@ -69,7 +62,7 @@ final class PersonTest extends TestCase
 
     public function testPeselDateWithYearBefore1900()
     {
-        $date  = new DateTime('1801-01-01');
+        $date = new DateTime('1801-01-01');
         $pesel = $this->faker->pesel($date);
 
         $this->assertEquals('01', substr($pesel, 0, 2));
@@ -79,7 +72,7 @@ final class PersonTest extends TestCase
 
     public function testPeselSex()
     {
-        $male   = $this->faker->pesel(null, 'M');
+        $male = $this->faker->pesel(null, 'M');
         $female = $this->faker->pesel(null, 'F');
 
         $this->assertEquals(1, $male[9] % 2);
@@ -88,14 +81,21 @@ final class PersonTest extends TestCase
 
     public function testPeselCheckSum()
     {
-        $pesel   = $this->faker->pesel();
-        $weights = array(1, 3, 7, 9, 1, 3, 7, 9, 1, 3, 1);
-        $sum     = 0;
+        $pesel = $this->faker->pesel();
+        $weights = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3, 1];
+        $sum = 0;
 
         foreach ($weights as $key => $weight) {
             $sum += $pesel[$key] * $weight;
         }
 
         $this->assertEquals(0, $sum % 10);
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new Person($faker));
+        $this->faker = $faker;
     }
 }

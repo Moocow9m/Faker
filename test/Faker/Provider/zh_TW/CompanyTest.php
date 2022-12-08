@@ -13,15 +13,15 @@ final class CompanyTest extends TestCase
      */
     private $faker;
 
+    public function testVAT()
+    {
+        $this->assertEquals(8, floor(log10($this->faker->VAT) + 1));
+    }
+
     protected function setUp()
     {
         $faker = new Generator();
         $faker->addProvider(new Company($faker));
         $this->faker = $faker;
-    }
-
-    public function testVAT()
-    {
-        $this->assertEquals(8, floor(log10($this->faker->VAT) + 1));
     }
 }

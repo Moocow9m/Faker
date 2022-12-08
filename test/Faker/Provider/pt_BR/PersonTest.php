@@ -9,13 +9,6 @@ use PHPUnit\Framework\TestCase;
 final class PersonTest extends TestCase
 {
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new Person($faker));
-        $this->faker = $faker;
-    }
-
     public function testCpfFormatIsValid()
     {
         $cpf = $this->faker->cpf(false);
@@ -30,5 +23,12 @@ final class PersonTest extends TestCase
         $this->assertRegExp('/\d{8}\d/', $rg);
         $rg = $this->faker->rg(true);
         $this->assertRegExp('/\d{2}\.\d{3}\.\d{3}-[0-9X]/', $rg);
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new Person($faker));
+        $this->faker = $faker;
     }
 }

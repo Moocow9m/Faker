@@ -14,18 +14,18 @@ final class PaymentTest extends TestCase
      */
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new Payment($faker));
-        $this->faker = $faker;
-    }
-
     public function testVatIsValid()
     {
         $vat = $this->faker->vat();
         $unspacedVat = $this->faker->vat(false);
         $this->assertRegExp('/^(AT U\d{8})$/', $vat);
         $this->assertRegExp('/^(ATU\d{8})$/', $unspacedVat);
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new Payment($faker));
+        $this->faker = $faker;
     }
 }

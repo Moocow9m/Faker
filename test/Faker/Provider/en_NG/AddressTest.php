@@ -14,13 +14,6 @@ final class AddressTest extends TestCase
      */
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new Address($faker));
-        $this->faker = $faker;
-    }
-
     /**
      *
      */
@@ -52,6 +45,13 @@ final class AddressTest extends TestCase
 
         $this->assertNotEmpty($region);
         $this->assertInternalType('string', $region);
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new Address($faker));
+        $this->faker = $faker;
     }
 
 }

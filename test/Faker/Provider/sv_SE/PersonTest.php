@@ -12,22 +12,9 @@ final class PersonTest extends TestCase
     /** @var Generator */
     protected $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new Person($faker));
-        $this->faker = $faker;
-    }
-
     public function provideSeedAndExpectedReturn()
     {
-        return array(
-            array(1, '720727', '720727-5798'),
-            array(2, '710414', '710414-5664'),
-            array(3, '591012', '591012-4519'),
-            array(4, '180307', '180307-0356'),
-            array(5, '820904', '820904-7748')
-        );
+        return [[1, '720727', '720727-5798'], [2, '710414', '710414-5664'], [3, '591012', '591012-4519'], [4, '180307', '180307-0356'], [5, '820904', '820904-7748']];
     }
 
     /**
@@ -57,5 +44,12 @@ final class PersonTest extends TestCase
     {
         $pin = $this->faker->personalIdentityNumber(null, 'female');
         $this->assertEquals(0, $pin[9] % 2);
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new Person($faker));
+        $this->faker = $faker;
     }
 }

@@ -8,12 +8,41 @@ final class TextTest extends TestCase
 {
     private $textClass;
 
-    protected function setUp()
+    function testItShouldAppendEndPunctToTheEndOfString()
     {
-        $this->textClass = new \ReflectionClass('Faker\Provider\kk_KZ\Text');
+        $this->assertSame(
+            'Арыстан баб кесенесі - көне Отырар.',
+            $this->getMethod('appendEnd')->invokeArgs(null, ['Арыстан баб кесенесі - көне Отырар '])
+        );
+
+        $this->assertSame(
+            'Арыстан баб кесенесі - көне Отырар.',
+            $this->getMethod('appendEnd')->invokeArgs(null, ['Арыстан баб кесенесі - көне Отырар— '])
+        );
+
+        $this->assertSame(
+            'Арыстан баб кесенесі - көне Отырар.',
+            $this->getMethod('appendEnd')->invokeArgs(null, ['Арыстан баб кесенесі - көне Отырар,  '])
+        );
+
+        $this->assertSame(
+            'Арыстан баб кесенесі - көне Отырар!.',
+            $this->getMethod('appendEnd')->invokeArgs(null, ['Арыстан баб кесенесі - көне Отырар! '])
+        );
+
+        $this->assertSame(
+            'Арыстан баб кесенесі - көне Отырар.',
+            $this->getMethod('appendEnd')->invokeArgs(null, ['Арыстан баб кесенесі - көне Отырар: '])
+        );
+
+        $this->assertSame(
+            'Арыстан баб кесенесі - көне Отырар.',
+            $this->getMethod('appendEnd')->invokeArgs(null, ['Арыстан баб кесенесі - көне Отырар; '])
+        );
     }
 
-    protected function getMethod($name) {
+    protected function getMethod($name)
+    {
         $method = $this->textClass->getMethod($name);
 
         $method->setAccessible(true);
@@ -21,36 +50,8 @@ final class TextTest extends TestCase
         return $method;
     }
 
-    function testItShouldAppendEndPunctToTheEndOfString()
+    protected function setUp()
     {
-        $this->assertSame(
-            'Арыстан баб кесенесі - көне Отырар.',
-            $this->getMethod('appendEnd')->invokeArgs(null, array('Арыстан баб кесенесі - көне Отырар '))
-        );
-
-        $this->assertSame(
-            'Арыстан баб кесенесі - көне Отырар.',
-            $this->getMethod('appendEnd')->invokeArgs(null, array('Арыстан баб кесенесі - көне Отырар— '))
-        );
-
-        $this->assertSame(
-            'Арыстан баб кесенесі - көне Отырар.',
-            $this->getMethod('appendEnd')->invokeArgs(null, array('Арыстан баб кесенесі - көне Отырар,  '))
-        );
-
-        $this->assertSame(
-            'Арыстан баб кесенесі - көне Отырар!.',
-            $this->getMethod('appendEnd')->invokeArgs(null, array('Арыстан баб кесенесі - көне Отырар! '))
-        );
-
-        $this->assertSame(
-            'Арыстан баб кесенесі - көне Отырар.',
-            $this->getMethod('appendEnd')->invokeArgs(null, array('Арыстан баб кесенесі - көне Отырар: '))
-        );
-
-        $this->assertSame(
-            'Арыстан баб кесенесі - көне Отырар.',
-            $this->getMethod('appendEnd')->invokeArgs(null, array('Арыстан баб кесенесі - көне Отырар; '))
-        );
+        $this->textClass = new \ReflectionClass(\Faker\Provider\kk_KZ\Text::class);
     }
 }

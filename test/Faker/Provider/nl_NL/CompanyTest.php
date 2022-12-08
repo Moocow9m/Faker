@@ -10,13 +10,6 @@ final class CompanyTest extends TestCase
 {
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new Company($faker));
-        $this->faker = $faker;
-    }
-
     public function testGenerateValidVatNumber()
     {
         $vatNo = $this->faker->vat();
@@ -31,5 +24,12 @@ final class CompanyTest extends TestCase
 
         $this->assertEquals(14, strlen($btwNo));
         $this->assertRegExp('/^NL[0-9]{9}B[0-9]{2}$/', $btwNo);
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new Company($faker));
+        $this->faker = $faker;
     }
 }

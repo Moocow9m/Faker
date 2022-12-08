@@ -14,13 +14,6 @@ final class PhoneNumberTest extends TestCase
      */
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new PhoneNumber($faker));
-        $this->faker = $faker;
-    }
-
     public function testPhoneNumberReturnsPhoneNumberWithOrWithoutCountryCode()
     {
         $phoneNumber = $this->faker->phoneNumber();
@@ -28,5 +21,12 @@ final class PhoneNumberTest extends TestCase
         $this->assertNotEmpty($phoneNumber);
         $this->assertInternalType('string', $phoneNumber);
         $this->assertRegExp('/^(0|(\+234))\s?[789][01]\d\s?(\d{3}\s?\d{4})/', $phoneNumber);
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new PhoneNumber($faker));
+        $this->faker = $faker;
     }
 }

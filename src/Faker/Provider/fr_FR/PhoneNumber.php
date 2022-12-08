@@ -6,68 +6,13 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
 {
     // Phone numbers can't start by 00 in France
     // 01 is the most common prefix
-    protected static $formats = array(
-        '+33 (0)1 ## ## ## ##',
-        '+33 (0)1 ## ## ## ##',
-        '+33 (0)2 ## ## ## ##',
-        '+33 (0)3 ## ## ## ##',
-        '+33 (0)4 ## ## ## ##',
-        '+33 (0)5 ## ## ## ##',
-        '+33 (0)6 ## ## ## ##',
-        '+33 (0)7 {{phoneNumber07WithSeparator}}',
-        '+33 (0)8 {{phoneNumber08WithSeparator}}',
-        '+33 (0)9 ## ## ## ##',
-        '+33 1 ## ## ## ##',
-        '+33 1 ## ## ## ##',
-        '+33 2 ## ## ## ##',
-        '+33 3 ## ## ## ##',
-        '+33 4 ## ## ## ##',
-        '+33 5 ## ## ## ##',
-        '+33 6 ## ## ## ##',
-        '+33 7 {{phoneNumber07WithSeparator}}',
-        '+33 8 {{phoneNumber08WithSeparator}}',
-        '+33 9 ## ## ## ##',
-        '01########',
-        '01########',
-        '02########',
-        '03########',
-        '04########',
-        '05########',
-        '06########',
-        '07{{phoneNumber07}}',
-        '08{{phoneNumber08}}',
-        '09########',
-        '01 ## ## ## ##',
-        '01 ## ## ## ##',
-        '02 ## ## ## ##',
-        '03 ## ## ## ##',
-        '04 ## ## ## ##',
-        '05 ## ## ## ##',
-        '06 ## ## ## ##',
-        '07 {{phoneNumber07WithSeparator}}',
-        '08 {{phoneNumber08WithSeparator}}',
-        '09 ## ## ## ##',
-    );
+    protected static $formats = ['+33 (0)1 ## ## ## ##', '+33 (0)1 ## ## ## ##', '+33 (0)2 ## ## ## ##', '+33 (0)3 ## ## ## ##', '+33 (0)4 ## ## ## ##', '+33 (0)5 ## ## ## ##', '+33 (0)6 ## ## ## ##', '+33 (0)7 {{phoneNumber07WithSeparator}}', '+33 (0)8 {{phoneNumber08WithSeparator}}', '+33 (0)9 ## ## ## ##', '+33 1 ## ## ## ##', '+33 1 ## ## ## ##', '+33 2 ## ## ## ##', '+33 3 ## ## ## ##', '+33 4 ## ## ## ##', '+33 5 ## ## ## ##', '+33 6 ## ## ## ##', '+33 7 {{phoneNumber07WithSeparator}}', '+33 8 {{phoneNumber08WithSeparator}}', '+33 9 ## ## ## ##', '01########', '01########', '02########', '03########', '04########', '05########', '06########', '07{{phoneNumber07}}', '08{{phoneNumber08}}', '09########', '01 ## ## ## ##', '01 ## ## ## ##', '02 ## ## ## ##', '03 ## ## ## ##', '04 ## ## ## ##', '05 ## ## ## ##', '06 ## ## ## ##', '07 {{phoneNumber07WithSeparator}}', '08 {{phoneNumber08WithSeparator}}', '09 ## ## ## ##'];
 
     // Mobile phone numbers start by 06 and 07
     // 06 is the most common prefix
-    protected static $mobileFormats  = array(
-        '+33 (0)6 ## ## ## ##',
-        '+33 6 ## ## ## ##',
-        '+33 (0)7 {{phoneNumber07WithSeparator}}',
-        '+33 7 {{phoneNumber07WithSeparator}}',
-        '06########',
-        '07{{phoneNumber07}}',
-        '06 ## ## ## ##',
-        '07 {{phoneNumber07WithSeparator}}',
-    );
+    protected static $mobileFormats = ['+33 (0)6 ## ## ## ##', '+33 6 ## ## ## ##', '+33 (0)7 {{phoneNumber07WithSeparator}}', '+33 7 {{phoneNumber07WithSeparator}}', '06########', '07{{phoneNumber07}}', '06 ## ## ## ##', '07 {{phoneNumber07WithSeparator}}'];
 
-    protected static $serviceFormats = array(
-        '+33 (0)8 {{phoneNumber08WithSeparator}}',
-        '+33 8 {{phoneNumber08WithSeparator}}',
-        '08 {{phoneNumber08WithSeparator}}',
-        '08{{phoneNumber08}}',
-    );
+    protected static $serviceFormats = ['+33 (0)8 {{phoneNumber08WithSeparator}}', '+33 8 {{phoneNumber08WithSeparator}}', '08 {{phoneNumber08WithSeparator}}', '08{{phoneNumber08}}'];
 
     public function phoneNumber07()
     {
@@ -129,6 +74,7 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
 
         return static::numerify($this->generator->parse($format));
     }
+
     /**
      * @example '0891951357'
      */

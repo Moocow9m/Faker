@@ -2,8 +2,8 @@
 
 namespace Faker\Test\Provider;
 
-use Faker\Generator;
 use Faker\Calculator\Luhn;
+use Faker\Generator;
 use Faker\Provider\PhoneNumber;
 use PHPUnit\Framework\TestCase;
 
@@ -15,13 +15,6 @@ final class PhoneNumberTest extends TestCase
      */
     private $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new PhoneNumber($faker));
-        $this->faker = $faker;
-    }
-
     public function testPhoneNumberFormat()
     {
         $number = $this->faker->e164PhoneNumber();
@@ -32,5 +25,12 @@ final class PhoneNumberTest extends TestCase
     {
         $imei = $this->faker->imei();
         $this->assertTrue(Luhn::isValid($imei));
+    }
+
+    protected function setUp()
+    {
+        $faker = new Generator();
+        $faker->addProvider(new PhoneNumber($faker));
+        $this->faker = $faker;
     }
 }

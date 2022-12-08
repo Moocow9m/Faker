@@ -10,9 +10,9 @@ class Text extends \Faker\Provider\Text
     /**
      * All punctuation in $baseText: 、 。 「 」 『 』 ！ ？ ー ， ： ；
      */
-    protected static $notEndPunct = array('、', '「', '『', 'ー', '，', '：', '；');
-    protected static $endPunct = array('。', '」', '』', '！', '？');
-    protected static $notBeginPunct = array('、', '。', '」', '』', '！', '？', 'ー', '，', '：', '；');
+    protected static $notEndPunct = ['、', '「', '『', 'ー', '，', '：', '；'];
+    protected static $endPunct = ['。', '」', '』', '！', '？'];
+    protected static $notBeginPunct = ['、', '。', '」', '』', '！', '？', 'ー', '，', '：', '；'];
 
     /**
      * Title: 吶喊 Call to Arms (1922)
@@ -800,19 +800,6 @@ EOT;
 
     protected static $encoding = 'UTF-8';
 
-    protected static function explode($text)
-    {
-        $chars = array();
-
-        foreach (preg_split('//u', str_replace(PHP_EOL, '', $text)) as $char) {
-            if (! empty($char)) {
-                $chars[] = $char;
-            }
-        }
-
-        return $chars;
-    }
-
     protected static function strlen($text)
     {
         return function_exists('mb_strlen')
@@ -820,9 +807,22 @@ EOT;
             : count(static::explode($text));
     }
 
+    protected static function explode($text)
+    {
+        $chars = [];
+
+        foreach (preg_split('//u', str_replace(PHP_EOL, '', $text)) as $char) {
+            if (!empty($char)) {
+                $chars[] = $char;
+            }
+        }
+
+        return $chars;
+    }
+
     protected static function validStart($word)
     {
-        return ! in_array($word, static::$notBeginPunct);
+        return !in_array($word, static::$notBeginPunct);
     }
 
     protected static function appendEnd($text)
@@ -861,7 +861,7 @@ EOT;
      */
     protected static function utf8Encoding($text)
     {
-        $encoding = array();
+        $encoding = [];
 
         $chars = str_split($text);
 
@@ -875,19 +875,19 @@ EOT;
             switch (true) {
                 case $ord > 251:
                     $temp .= $chars[++$i];
-                    // no break
+                // no break
                 case $ord > 247:
                     $temp .= $chars[++$i];
-                    // no break
+                // no break
                 case $ord > 239:
                     $temp .= $chars[++$i];
-                    // no break
+                // no break
                 case $ord > 223:
                     $temp .= $chars[++$i];
-                    // no break
+                // no break
                 case $ord > 191:
                     $temp .= $chars[++$i];
-                    // no break
+                // no break
             }
 
             $encoding[] = $temp;

@@ -17,82 +17,36 @@ final class PersonTest extends TestCase
      */
     protected $faker;
 
-    protected function setUp()
-    {
-        $faker = new Generator();
-        $faker->addProvider(new DateTime($faker));
-        $faker->addProvider(new Person($faker));
-        $faker->setDefaultTimezone('Europe/Bucharest');
-        $this->faker = $faker;
-    }
-
-    protected function tearDown()
-    {
-        $this->faker->setDefaultTimezone();
-    }
-
     public function invalidGenderProvider()
     {
-        return array(
-            array('elf'),
-            array('ent'),
-            array('fmle'),
-            array('mal'),
-        );
+        return [['elf'], ['ent'], ['fmle'], ['mal']];
     }
 
     public function invalidYearProvider()
     {
-        return array(
-            array(1652),
-            array(1799),
-            array(2100),
-            array(2252),
-        );
+        return [[1652], [1799], [2100], [2252]];
     }
 
     public function validYearProvider()
     {
-        return array(
-            array(null),
-            array(''),
-            array(1800),
-            array(1850),
-            array(1900),
-            array(1990),
-            array(2000),
-            array(2099),
-        );
+        return [[null], [''], [1800], [1850], [1900], [1990], [2000], [2099]];
     }
 
     public function validCountyCodeProvider()
     {
-        return array(
-            array('AB'), array('AR'), array('AG'), array('B'), array('BC'), array('BH'), array('BN'), array('BT'),
-            array('BV'), array('BR'), array('BZ'), array('CS'), array('CL'), array('CJ'), array('CT'), array('CV'),
-            array('DB'), array('DJ'), array('GL'), array('GR'), array('GJ'), array('HR'), array('HD'), array('IL'),
-            array('IS'), array('IF'), array('MM'), array('MH'), array('MS'), array('NT'), array('OT'), array('PH'),
-            array('SM'), array('SJ'), array('SB'), array('SV'), array('TR'), array('TM'), array('TL'), array('VS'),
-            array('VL'), array('VN'), array('B1'), array('B2'), array('B3'), array('B4'), array('B5'), array('B6')
-        );
+        return [['AB'], ['AR'], ['AG'], ['B'], ['BC'], ['BH'], ['BN'], ['BT'], ['BV'], ['BR'], ['BZ'], ['CS'], ['CL'], ['CJ'], ['CT'], ['CV'], ['DB'], ['DJ'], ['GL'], ['GR'], ['GJ'], ['HR'], ['HD'], ['IL'], ['IS'], ['IF'], ['MM'], ['MH'], ['MS'], ['NT'], ['OT'], ['PH'], ['SM'], ['SJ'], ['SB'], ['SV'], ['TR'], ['TM'], ['TL'], ['VS'], ['VL'], ['VN'], ['B1'], ['B2'], ['B3'], ['B4'], ['B5'], ['B6']];
     }
 
     public function invalidCountyCodeProvider()
     {
-        return array(
-            array('JK'), array('REW'), array('x'), array('FF'), array('aaaddadaada')
-        );
+        return [['JK'], ['REW'], ['x'], ['FF'], ['aaaddadaada']];
     }
 
     public function validInputDataProvider()
     {
-        return array(
-            array(Person::GENDER_MALE, '1981-06-16','B2', true, '181061642'),
-            array(Person::GENDER_FEMALE, '1981-06-16','B2', true, '281061642'),
-            array(Person::GENDER_MALE, '1981-06-16','B2', false, '981061642'),
-            array(Person::GENDER_FEMALE, '1981-06-16','B2', false, '981061642'),
-        );
+        return [[Person::GENDER_MALE, '1981-06-16', 'B2', true, '181061642'], [Person::GENDER_FEMALE, '1981-06-16', 'B2', true, '281061642'], [Person::GENDER_MALE, '1981-06-16', 'B2', false, '981061642'], [Person::GENDER_FEMALE, '1981-06-16', 'B2', false, '981061642']];
     }
+
     /**
      *
      */
@@ -103,6 +57,26 @@ final class PersonTest extends TestCase
             $this->isValidCnp($cnp),
             sprintf("Invalid CNP '%' generated", $cnp)
         );
+    }
+
+    protected function isValidCnp($cnp)
+    {
+        if (preg_match(static::TEST_CNP_REGEX, $cnp) !== false) {
+            $checkNumber = 279146358279;
+
+            $checksum = 0;
+            foreach (range(0, 11) as $digit) {
+                $checksum += (int)substr($cnp, $digit, 1) * (int)substr($checkNumber, $digit, 1);
+            }
+            $checksum %= 11;
+            $checksum = $checksum == 10 ? 1 : $checksum;
+
+            if ($checksum == substr($cnp, -1)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -121,6 +95,16 @@ final class PersonTest extends TestCase
             $this->isValidFemaleCnp($cnp),
             sprintf("Invalid CNP '%' generated for '%s' gender", $cnp, Person::GENDER_FEMALE)
         );
+    }
+
+    protected function isValidMaleCnp($value)
+    {
+        return $this->isValidCnp($value) && in_array($value[0], [1, 3, 5, 7, 9]);
+    }
+
+    protected function isValidFemaleCnp($value)
+    {
+        return $this->isValidCnp($value) && in_array($value[0], [2, 4, 6, 8, 9]);
     }
 
     /**
@@ -219,34 +203,17 @@ final class PersonTest extends TestCase
         );
     }
 
-
-    protected function isValidFemaleCnp($value)
+    protected function setUp()
     {
-        return $this->isValidCnp($value) && in_array($value[0], array(2, 4, 6, 8, 9));
+        $faker = new Generator();
+        $faker->addProvider(new DateTime($faker));
+        $faker->addProvider(new Person($faker));
+        $faker->setDefaultTimezone('Europe/Bucharest');
+        $this->faker = $faker;
     }
 
-    protected function isValidMaleCnp($value)
+    protected function tearDown()
     {
-        return $this->isValidCnp($value) && in_array($value[0], array(1, 3, 5, 7, 9));
-    }
-
-    protected function isValidCnp($cnp)
-    {
-        if (preg_match(static::TEST_CNP_REGEX, $cnp) !== false) {
-            $checkNumber = 279146358279;
-
-            $checksum = 0;
-            foreach (range(0, 11) as $digit) {
-                $checksum += (int)substr($cnp, $digit, 1) * (int)substr($checkNumber, $digit, 1);
-            }
-            $checksum %= 11;
-            $checksum = $checksum == 10 ? 1 : $checksum;
-
-            if ($checksum == substr($cnp, -1)) {
-                return true;
-            }
-        }
-
-        return false;
+        $this->faker->setDefaultTimezone();
     }
 }
