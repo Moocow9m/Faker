@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 
 final class AddressTest extends TestCase
 {
-
     /**
      * @var Faker\Generator
      */
@@ -52,5 +51,3 @@ final class AddressTest extends TestCase
         $this->faker = $faker;
     }
 }
-
-?>

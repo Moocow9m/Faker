@@ -9,7 +9,6 @@ use PHPUnit\Framework\TestCase;
 
 final class PersonTest extends TestCase
 {
-
     public function testIndividualIdentificationNumberIsValid()
     {
         $birthDate = DateTime::dateTimeBetween('-30 years', '-10 years');

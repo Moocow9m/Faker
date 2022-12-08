@@ -27,5 +27,3 @@ final class PersonTest extends TestCase
         $this->faker = $faker;
     }
 }
-
-?>

@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 
 final class CompanyTest extends TestCase
 {
-
     public function testBusinessIdentificationNumberIsValid()
     {
         $registrationDate = new \DateTime('now');

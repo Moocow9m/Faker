@@ -29,9 +29,11 @@ final class CompanyTest extends TestCase
     {
         $phrase = $this->faker->catchPhrase;
         $this->assertNotNull($phrase);
-        $this->assertGreaterThanOrEqual(3,
+        $this->assertGreaterThanOrEqual(
+            3,
             count(explode(' ', $this->faker->catchPhrase)),
-            "'$phrase' - should be contain 3 word");
+            "'$phrase' - should be contain 3 word"
+        );
     }
 
     protected function setUp(): void

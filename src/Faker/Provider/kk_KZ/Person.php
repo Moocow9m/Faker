@@ -6,7 +6,6 @@ use Faker\Provider\DateTime;
 
 class Person extends \Faker\Provider\Person
 {
-
     public const GENDER_MALE = 0;
     public const GENDER_FEMALE = 1;
 

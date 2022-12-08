@@ -30,6 +30,4 @@ final class CompanyTest extends TestCase
         $faker->addProvider(new Company($faker));
         $this->faker = $faker;
     }
-
-
 }

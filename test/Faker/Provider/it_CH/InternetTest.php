@@ -10,7 +10,6 @@ use PHPUnit\Framework\TestCase;
 
 final class InternetTest extends TestCase
 {
-
     /**
      * @var Faker\Generator
      */

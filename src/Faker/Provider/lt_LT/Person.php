@@ -4,7 +4,6 @@ namespace Faker\Provider\lt_LT;
 
 class Person extends \Faker\Provider\Person
 {
-
     protected static $maleNameFormats = ['{{firstNameMale}} {{lastNameMale}}'];
 
     protected static $femaleNameFormats = ['{{firstNameFemale}} {{lastNameFemale}}'];

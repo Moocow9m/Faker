@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Faker\ORM\Spot;
 
 use Spot\Locator;
@@ -41,8 +40,7 @@ class Populator
         $customColumnFormatters = [],
         $customModifiers = [],
         $useExistingData = false
-    )
-    {
+    ) {
         $mapper = $this->locator->mapper($entityName);
         if (null === $mapper) {
             throw new \InvalidArgumentException("No mapper can be found for entity " . $entityName);

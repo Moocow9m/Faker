@@ -9,7 +9,6 @@ use PHPUnit\Framework\TestCase;
 
 final class AddressTest extends TestCase
 {
-
     private \Faker\Generator $faker;
 
     public function testPostCodeIsValid()

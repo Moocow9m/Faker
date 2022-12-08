@@ -7,7 +7,6 @@ use Faker\UniqueGenerator;
 
 class HtmlLorem extends Base
 {
-
     public const HTML_TAG = "html";
     public const HEAD_TAG = "head";
     public const BODY_TAG = "body";

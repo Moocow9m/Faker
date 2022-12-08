@@ -89,7 +89,6 @@ final class LoremTest extends TestCase
 
 final class TestableLorem extends Lorem
 {
-
     public static function word()
     {
         return 'word';

@@ -4,7 +4,6 @@ namespace Faker\Provider\sl_SI;
 
 class Person extends \Faker\Provider\Person
 {
-
     protected static $maleNameFormats = ['{{firstNameMale}} {{lastName}}', '{{firstNameMale}} {{lastName}}', '{{firstNameMale}} {{lastName}}', '{{firstNameMale}} {{lastName}}', '{{title}} {{firstNameMale}} {{lastName}}'];
 
     protected static $femaleNameFormats = ['{{firstNameFemale}} {{lastName}}', '{{firstNameFemale}} {{lastName}}', '{{firstNameFemale}} {{lastName}}', '{{firstNameFemale}} {{lastName}}', '{{title}} {{firstNameFemale}} {{lastName}}'];

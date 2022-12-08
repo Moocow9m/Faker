@@ -20,5 +20,4 @@ final class PersonTest extends TestCase
         $faker->addProvider(new Person($faker));
         $this->faker = $faker;
     }
-
 }

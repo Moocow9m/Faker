@@ -9,7 +9,6 @@ use PHPUnit\Framework\TestCase;
 
 final class InternetTest extends TestCase
 {
-
     private \Faker\Generator $faker;
 
     public function testEmailIsValid()

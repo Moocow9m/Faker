@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 
 final class PhoneNumberTest extends TestCase
 {
-
     /**
      * @var Faker\Generator
      */
@@ -33,5 +32,3 @@ final class PhoneNumberTest extends TestCase
         $this->faker = $faker;
     }
 }
-
-?>

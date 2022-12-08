@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 
 final class PhoneNumberTest extends TestCase
 {
-
     /**
      * @var Faker\Generator
      */

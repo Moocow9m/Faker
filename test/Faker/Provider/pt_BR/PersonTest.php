@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 
 final class PersonTest extends TestCase
 {
-
     public function testCpfFormatIsValid()
     {
         $cpf = $this->faker->cpf(false);

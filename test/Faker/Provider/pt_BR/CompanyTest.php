@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 
 final class CompanyTest extends TestCase
 {
-
     public function testCnpjFormatIsValid()
     {
         $cnpj = $this->faker->cnpj(false);

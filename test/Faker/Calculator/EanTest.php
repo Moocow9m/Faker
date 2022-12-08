@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Faker\Test\Calculator;
-
 
 use Faker\Calculator\Ean;
 use PHPUnit\Framework\TestCase;
@@ -60,5 +58,4 @@ final class EanTest extends TestCase
     {
         $this->assertTrue(Ean::isValid($ean13) === $valid);
     }
-
 }

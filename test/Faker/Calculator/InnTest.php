@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 
 final class InnTest extends TestCase
 {
-
     public function checksumProvider()
     {
         return [['143525744', '4'], ['500109285', '3'], ['500109285', '3'], ['500109285', '3'], ['027615723', '1']];

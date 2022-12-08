@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 
 final class PhoneNumberTest extends TestCase
 {
-
     private \Faker\Generator $faker;
 
     public function testPhoneNumberFormat()
@@ -20,7 +19,6 @@ final class PhoneNumberTest extends TestCase
             1,
             'Phone number format ' . $phoneNumber . ' is wrong!'
         );
-
     }
 
     protected function setUp(): void
@@ -29,5 +27,4 @@ final class PhoneNumberTest extends TestCase
         $faker->addProvider(new PhoneNumber($faker));
         $this->faker = $faker;
     }
-
 }
