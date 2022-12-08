@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 final class AddressTest extends TestCase
 {
-    private \Faker\Generator $faker;
+    private Generator $faker;
 
     public function testPostCodeIsValid()
     {
@@ -51,7 +51,7 @@ final class AddressTest extends TestCase
         $pattern = "/[А-ЩЯІЇЄЮ][А-ЩЯІЇЄЮа-щяіїєюь]*а$/u";
         $regionName = $this->faker->region;
         $this->assertSame(
-            preg_match($pattern, $regionName),
+            preg_match($pattern, (string) $regionName),
             1,
             'Region name ' . $regionName . ' is wrong!'
         );

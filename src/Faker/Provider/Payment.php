@@ -55,7 +55,7 @@ class Payment extends Base
         $expandedFormat = '';
         foreach ($format as $item) {
             [$class, $length] = $item;
-            $expandedFormat .= str_repeat($class, $length);
+            $expandedFormat .= str_repeat((string) $class, $length);
         }
 
         $result = $prefix;

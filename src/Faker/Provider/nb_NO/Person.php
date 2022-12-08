@@ -27,7 +27,6 @@ class Person extends \Faker\Provider\Person
     /**
      * National Personal Identity number (personnummer)
      * @link https://no.wikipedia.org/wiki/Personnummer
-     * @param \DateTime $birthdate
      * @param string $gender Person::GENDER_MALE || Person::GENDER_FEMALE
      * @return string on format DDMMYY#####
      */
@@ -44,16 +43,11 @@ class Person extends \Faker\Provider\Person
          */
         $randomDigits = (string)static::numerify('##');
 
-        switch ($gender) {
-            case static::GENDER_MALE:
-                $genderDigit = static::randomElement([1, 3, 5, 7, 9]);
-                break;
-            case static::GENDER_FEMALE:
-                $genderDigit = static::randomElement([0, 2, 4, 6, 8]);
-                break;
-            default:
-                $genderDigit = (string)static::numerify('#');
-        }
+        $genderDigit = match ($gender) {
+            static::GENDER_MALE => static::randomElement([1, 3, 5, 7, 9]),
+            static::GENDER_FEMALE => static::randomElement([0, 2, 4, 6, 8]),
+            default => (string)static::numerify('#'),
+        };
 
 
         $digits = $datePart . $randomDigits . $genderDigit;

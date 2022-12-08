@@ -8,13 +8,13 @@ use PHPUnit\Framework\TestCase;
 
 final class CompanyTest extends TestCase
 {
-    private \Faker\Generator $faker;
+    private Generator $faker;
 
     public function testGenerateValidCompanyNumber()
     {
         $companyRegNo = $this->faker->companyNumber();
 
-        $this->assertEquals(14, strlen($companyRegNo));
+        $this->assertEquals(14, strlen((string) $companyRegNo));
         $this->assertMatchesRegularExpression('#^\d{4}/\d{6}/\d{2}$#', $companyRegNo);
     }
 

@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 final class AddressTest extends TestCase
 {
-    private \Faker\Generator $faker;
+    private Generator $faker;
 
     /**
      * @see https://en.wikipedia.org/wiki/List_of_postal_codes_in_Austria

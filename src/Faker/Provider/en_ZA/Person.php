@@ -602,10 +602,8 @@ class Person extends \Faker\Provider\Person
     /**
      * @link https://en.wikipedia.org/wiki/National_identification_number#South_Africa
      *
-     * @param \DateTime $birthdate
      * @param bool $citizen
      * @param string $gender
-     *
      * @return string
      */
     public function idNumber(\DateTime $birthdate = null, $citizen = true, $gender = null)
@@ -614,16 +612,11 @@ class Person extends \Faker\Provider\Person
             $birthdate = $this->generator->dateTimeThisCentury();
         }
         $birthDateString = $birthdate->format('ymd');
-        switch (strtolower($gender)) {
-            case static::GENDER_FEMALE:
-                $genderDigit = self::numberBetween(0, 4);
-                break;
-            case static::GENDER_MALE:
-                $genderDigit = self::numberBetween(5, 9);
-                break;
-            default:
-                $genderDigit = self::numberBetween(0, 9);
-        }
+        $genderDigit = match (strtolower($gender)) {
+            static::GENDER_FEMALE => self::numberBetween(0, 4),
+            static::GENDER_MALE => self::numberBetween(5, 9),
+            default => self::numberBetween(0, 9),
+        };
         $sequenceDigits = str_pad(self::randomNumber(3), 3, 0, STR_PAD_BOTH);
         $citizenDigit = ($citizen === true) ? '0' : '1';
         $raceDigit = self::numberBetween(8, 9);

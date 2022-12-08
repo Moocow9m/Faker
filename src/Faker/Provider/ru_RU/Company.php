@@ -39,10 +39,10 @@ class Company extends \Faker\Provider\Company
 
     public static function kpp($inn = "")
     {
-        if ($inn == "" || strlen($inn) < 4) {
+        if ($inn == "" || strlen((string) $inn) < 4) {
             $inn = static::inn();
         }
-        return substr($inn, 0, 4) . "01001";
+        return substr((string) $inn, 0, 4) . "01001";
     }
 
     public static function inn($area_code = "")

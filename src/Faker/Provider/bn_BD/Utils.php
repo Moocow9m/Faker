@@ -9,6 +9,6 @@ class Utils
         $english = range(0, 10);
         $bangla = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
 
-        return str_replace($english, $bangla, $number);
+        return str_replace($english, $bangla, (string) $number);
     }
 }

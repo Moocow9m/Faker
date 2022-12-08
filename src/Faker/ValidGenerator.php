@@ -10,14 +10,12 @@ class ValidGenerator
 {
     protected $generator;
     protected $validator;
-    protected $maxRetries;
 
     /**
-     * @param Generator $generator
      * @param callable|null $validator
      * @param integer $maxRetries
      */
-    public function __construct(Generator $generator, $validator = null, $maxRetries = 10000)
+    public function __construct(Generator $generator, $validator = null, protected $maxRetries = 10000)
     {
         if (is_null($validator)) {
             $validator = fn() => true;
@@ -26,7 +24,6 @@ class ValidGenerator
         }
         $this->generator = $generator;
         $this->validator = $validator;
-        $this->maxRetries = $maxRetries;
     }
 
     /**

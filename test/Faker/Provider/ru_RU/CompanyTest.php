@@ -8,21 +8,21 @@ use PHPUnit\Framework\TestCase;
 
 final class CompanyTest extends TestCase
 {
-    private \Faker\Generator $faker;
+    private Generator $faker;
 
     public function testINN()
     {
         $this->assertMatchesRegularExpression('/^[0-9]{10}$/', $this->faker->inn);
-        $this->assertEquals("77", substr($this->faker->inn("77"), 0, 2));
-        $this->assertEquals("02", substr($this->faker->inn(2), 0, 2));
+        $this->assertEquals("77", substr((string) $this->faker->inn("77"), 0, 2));
+        $this->assertEquals("02", substr((string) $this->faker->inn(2), 0, 2));
     }
 
     public function testKPP()
     {
         $this->assertMatchesRegularExpression('/^[0-9]{9}$/', $this->faker->kpp);
-        $this->assertEquals("01001", substr($this->faker->kpp, -5, 5));
+        $this->assertEquals("01001", substr((string) $this->faker->kpp, -5, 5));
         $inn = $this->faker->inn;
-        $this->assertEquals(substr($inn, 0, 4), substr($this->faker->kpp($inn), 0, 4));
+        $this->assertEquals(substr((string) $inn, 0, 4), substr((string) $this->faker->kpp($inn), 0, 4));
     }
 
     public function testCatchPhrase()

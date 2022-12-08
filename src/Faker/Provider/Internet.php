@@ -65,7 +65,7 @@ class Internet extends Base
         $format = static::randomElement(static::$userNameFormats);
         $username = static::bothify($this->generator->parse($format));
 
-        $username = strtolower(static::transliterate($username));
+        $username = strtolower((string) static::transliterate($username));
 
         // check if transliterate() didn't support the language and removed all letters
         if (trim($username, '._') === '') {
@@ -81,7 +81,7 @@ class Internet extends Base
 
     protected static function transliterate($string)
     {
-        if (0 === preg_match('/[^A-Za-z0-9_.]/', $string)) {
+        if (0 === preg_match('/[^A-Za-z0-9_.]/', (string) $string)) {
             return $string;
         }
 
@@ -92,7 +92,7 @@ class Internet extends Base
             $transString = static::toAscii($string);
         }
 
-        return preg_replace('/[^A-Za-z0-9_.]/u', '', $transString);
+        return preg_replace('/[^A-Za-z0-9_.]/u', '', (string) $transString);
     }
 
     protected static function toAscii($string)
@@ -105,7 +105,7 @@ class Internet extends Base
             $arrayTo = array_values($transliterationTable);
         }
 
-        return str_replace($arrayFrom, $arrayTo, $string);
+        return str_replace($arrayFrom, $arrayTo, (string) $string);
     }
 
     /**
@@ -157,7 +157,7 @@ class Internet extends Base
     {
         $lastName = $this->generator->format('lastName');
 
-        $lastName = strtolower(static::transliterate($lastName));
+        $lastName = strtolower((string) static::transliterate($lastName));
 
         // check if transliterate() didn't support the language and removed all letters
         if (trim($lastName, '._') === '') {

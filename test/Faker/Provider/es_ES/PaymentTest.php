@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 final class PaymentTest extends TestCase
 {
-    private \Faker\Generator $faker;
+    private Generator $faker;
 
     public function testVAT()
     {
@@ -23,7 +23,7 @@ final class PaymentTest extends TestCase
      */
     function isValidCIF($docNumber)
     {
-        $fixedDocNumber = strtoupper($docNumber);
+        $fixedDocNumber = strtoupper((string) $docNumber);
 
         return $this->isValidCIFFormat($fixedDocNumber);
     }
@@ -38,7 +38,7 @@ final class PaymentTest extends TestCase
     function respectsDocPattern($givenString, $pattern)
     {
         $isValid = false;
-        $fixedString = strtoupper($givenString);
+        $fixedString = strtoupper((string) $givenString);
         if (is_int(substr($fixedString, 0, 1))) {
             $fixedString = substr("000000000" . $givenString, -9);
         }

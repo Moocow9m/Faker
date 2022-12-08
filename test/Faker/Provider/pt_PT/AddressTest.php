@@ -9,14 +9,14 @@ use PHPUnit\Framework\TestCase;
 
 final class AddressTest extends TestCase
 {
-    private \Faker\Generator $faker;
+    private Generator $faker;
 
     public function testPostCodeIsValid()
     {
         $main = '[1-9]{1}[0-9]{2}[0,1,4,5,9]{1}';
         $pattern = "/^($main)|($main-[0-9]{3})+$/";
         $postcode = $this->faker->postcode();
-        $this->assertSame(preg_match($pattern, $postcode), 1, $postcode);
+        $this->assertSame(preg_match($pattern, (string) $postcode), 1, $postcode);
     }
 
     public function testAddressIsSingleLine()
@@ -24,7 +24,7 @@ final class AddressTest extends TestCase
         $this->faker->addProvider(new Person($this->faker));
 
         $address = $this->faker->address();
-        $this->assertFalse(strstr($address, "\n"));
+        $this->assertFalse(strstr((string) $address, "\n"));
     }
 
     protected function setUp(): void

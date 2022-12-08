@@ -44,7 +44,7 @@ class Color extends Base
     {
         $color = static::hexColor();
 
-        return [hexdec(substr($color, 1, 2)), hexdec(substr($color, 3, 2)), hexdec(substr($color, 5, 2))];
+        return [hexdec(substr((string) $color, 1, 2)), hexdec(substr((string) $color, 3, 2)), hexdec(substr((string) $color, 5, 2))];
     }
 
     /**

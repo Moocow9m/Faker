@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 final class PersonTest extends TestCase
 {
-    private \Faker\Generator $faker;
+    private Generator $faker;
 
     public function testDNI()
     {

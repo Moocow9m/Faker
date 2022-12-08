@@ -12,7 +12,7 @@ final class PersonTest extends TestCase
     public const TEST_CNP_REGEX = '/^[1-9][0-9]{2}(?:0[1-9]|1[012])(?:0[1-9]|[12][0-9]|3[01])(?:0[1-9]|[123][0-9]|4[0-6]|5[12])[0-9]{3}[0-9]$/';
 
     /**
-     * @var \Faker\Generator
+     * @var Generator
      *
      */
     protected $faker;
@@ -61,17 +61,17 @@ final class PersonTest extends TestCase
 
     protected function isValidCnp($cnp)
     {
-        if (preg_match(static::TEST_CNP_REGEX, $cnp) !== false) {
+        if (preg_match(static::TEST_CNP_REGEX, (string) $cnp) !== false) {
             $checkNumber = 279_146_358_279;
 
             $checksum = 0;
             foreach (range(0, 11) as $digit) {
-                $checksum += (int)substr($cnp, $digit, 1) * (int)substr($checkNumber, $digit, 1);
+                $checksum += (int)substr((string) $cnp, $digit, 1) * (int)substr($checkNumber, $digit, 1);
             }
             $checksum %= 11;
             $checksum = $checksum == 10 ? 1 : $checksum;
 
-            if ($checksum == substr($cnp, -1)) {
+            if ($checksum == substr((string) $cnp, -1)) {
                 return true;
             }
         }

@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 final class PhoneNumberTest extends TestCase
 {
-    private \Faker\Generator $faker;
+    private Generator $faker;
 
     public function testPhoneNumber()
     {
@@ -48,7 +48,7 @@ final class PhoneNumberTest extends TestCase
     {
         for ($i = 0; $i < 100; $i++) {
             $number = $this->faker->tollFreePhoneNumber;
-            $digits = array_values(array_filter(str_split($number), 'ctype_digit'));
+            $digits = array_values(array_filter(str_split((string) $number), 'ctype_digit'));
 
             // Prefix '1' allowed
             if (count($digits) === 11) {

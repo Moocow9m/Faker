@@ -62,16 +62,12 @@ class EntityPopulator
         $this->columnFormatters = array_merge($this->columnFormatters, $columnFormatters);
     }
 
-    /**
-     * @param array $modifiers
-     */
     public function mergeModifiersWith(array $modifiers)
     {
         $this->modifiers = array_merge($this->modifiers, $modifiers);
     }
 
     /**
-     * @param \Faker\Generator $generator
      * @return array
      */
     public function guessColumnFormatters(\Faker\Generator $generator)
@@ -188,7 +184,7 @@ class EntityPopulator
                 } catch (\InvalidArgumentException $ex) {
                     throw new \InvalidArgumentException(sprintf(
                         "Failed to generate a value for %s::%s: %s",
-                        get_class($obj),
+                        $obj::class,
                         $field,
                         $ex->getMessage()
                     ));
@@ -219,9 +215,6 @@ class EntityPopulator
         return $this->modifiers;
     }
 
-    /**
-     * @param array $modifiers
-     */
     public function setModifiers(array $modifiers)
     {
         $this->modifiers = $modifiers;
@@ -234,7 +227,7 @@ class EntityPopulator
     private function generateId($obj, $column, ObjectManager $manager)
     {
         /* @var $repository \Doctrine\Common\Persistence\ObjectRepository */
-        $repository = $manager->getRepository(get_class($obj));
+        $repository = $manager->getRepository($obj::class);
         $result = $repository->createQueryBuilder('e')
             ->select(sprintf('e.%s', $column))
             ->getQuery()

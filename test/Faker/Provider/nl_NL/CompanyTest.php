@@ -8,13 +8,13 @@ use PHPUnit\Framework\TestCase;
 
 final class CompanyTest extends TestCase
 {
-    private \Faker\Generator $faker;
+    private Generator $faker;
 
     public function testGenerateValidVatNumber()
     {
         $vatNo = $this->faker->vat();
 
-        $this->assertEquals(14, strlen($vatNo));
+        $this->assertEquals(14, strlen((string) $vatNo));
         $this->assertMatchesRegularExpression('/^NL[0-9]{9}B[0-9]{2}$/', $vatNo);
     }
 
@@ -22,7 +22,7 @@ final class CompanyTest extends TestCase
     {
         $btwNo = $this->faker->btw();
 
-        $this->assertEquals(14, strlen($btwNo));
+        $this->assertEquals(14, strlen((string) $btwNo));
         $this->assertMatchesRegularExpression('/^NL[0-9]{9}B[0-9]{2}$/', $btwNo);
     }
 

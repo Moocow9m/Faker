@@ -8,9 +8,6 @@ class Name
 {
     protected $generator;
 
-    /**
-     * @param \Faker\Generator $generator
-     */
     public function __construct(\Faker\Generator $generator)
     {
         $this->generator = $generator;
@@ -66,17 +63,12 @@ class Name
 
                 return fn() => $generator->state;
             case 'country':
-                switch ($size) {
-                    case 2:
-                        return fn() => $generator->countryCode;
-                    case 3:
-                        return fn() => $generator->countryISOAlpha3;
-                    case 5:
-                    case 6:
-                        return fn() => $generator->locale;
-                    default:
-                        return fn() => $generator->country;
-                }
+                return match ($size) {
+                    2 => fn() => $generator->countryCode,
+                    3 => fn() => $generator->countryISOAlpha3,
+                    5, 6 => fn() => $generator->locale,
+                    default => fn() => $generator->country,
+                };
                 break;
             case 'locale':
                 return fn() => $generator->locale;

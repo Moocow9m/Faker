@@ -6,14 +6,12 @@ use Cake\ORM\TableRegistry;
 
 class EntityPopulator
 {
-    protected $class;
     protected $connectionName;
     protected $columnFormatters = [];
     protected $modifiers = [];
 
-    public function __construct($class)
+    public function __construct(protected $class)
     {
-        $this->class = $class;
     }
 
     /**

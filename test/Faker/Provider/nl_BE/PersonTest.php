@@ -11,20 +11,20 @@ use PHPUnit\Framework\TestCase;
  */
 final class PersonTest extends TestCase
 {
-    private \Faker\Generator $faker;
+    private Generator $faker;
 
     public function testRrnIsValid()
     {
         $rrn = $this->faker->rrn();
 
-        $this->assertEquals(11, strlen($rrn));
+        $this->assertEquals(11, strlen((string) $rrn));
 
-        $ctrlNumber = substr($rrn, 9, 2);
-        $calcCtrl = 97 - (substr($rrn, 0, 9) % 97);
-        $altcalcCtrl = 97 - ((2 . substr($rrn, 0, 9)) % 97);
+        $ctrlNumber = substr((string) $rrn, 9, 2);
+        $calcCtrl = 97 - (substr((string) $rrn, 0, 9) % 97);
+        $altcalcCtrl = 97 - ((2 . substr((string) $rrn, 0, 9)) % 97);
         $this->assertContainsEquals($ctrlNumber, [$calcCtrl, $altcalcCtrl]);
 
-        $middle = substr($rrn, 6, 3);
+        $middle = substr((string) $rrn, 6, 3);
         $this->assertGreaterThan(1, $middle);
         $this->assertLessThan(997, $middle);
     }
@@ -32,13 +32,13 @@ final class PersonTest extends TestCase
     public function testRrnIsMale()
     {
         $rrn = $this->faker->rrn('male');
-        $this->assertEquals(substr($rrn, 6, 3) % 2, 1);
+        $this->assertEquals(substr((string) $rrn, 6, 3) % 2, 1);
     }
 
     public function testRrnIsFemale()
     {
         $rrn = $this->faker->rrn('female');
-        $this->assertEquals(substr($rrn, 6, 3) % 2, 0);
+        $this->assertEquals(substr((string) $rrn, 6, 3) % 2, 0);
     }
 
     protected function setUp(): void

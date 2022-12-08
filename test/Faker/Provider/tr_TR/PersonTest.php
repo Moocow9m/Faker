@@ -9,14 +9,14 @@ use PHPUnit\Framework\TestCase;
 
 final class PersonTest extends TestCase
 {
-    private \Faker\Generator $faker;
+    private Generator $faker;
 
     public function testTCNo()
     {
         for ($i = 0; $i < 100; $i++) {
             $number = $this->faker->tcNo;
 
-            $this->assertEquals(11, strlen($number));
+            $this->assertEquals(11, strlen((string) $number));
             $this->assertTrue(TCNo::isValid($number));
         }
     }

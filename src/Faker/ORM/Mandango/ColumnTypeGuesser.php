@@ -6,9 +6,6 @@ class ColumnTypeGuesser
 {
     protected $generator;
 
-    /**
-     * @param \Faker\Generator $generator
-     */
     public function __construct(\Faker\Generator $generator)
     {
         $this->generator = $generator;
@@ -20,20 +17,13 @@ class ColumnTypeGuesser
     public function guessFormat($field)
     {
         $generator = $this->generator;
-        switch ($field['type']) {
-            case 'boolean':
-                return fn() => $generator->boolean;
-            case 'integer':
-                return fn() => mt_rand(0, intval('4294967295'));
-            case 'float':
-                return fn() => mt_rand(0, intval('4294967295')) / mt_rand(1, intval('4294967295'));
-            case 'string':
-                return fn() => $generator->text(255);
-            case 'date':
-                return fn() => $generator->datetime;
-            default:
-                // no smart way to guess what the user expects here
-                return null;
-        }
+        return match ($field['type']) {
+            'boolean' => fn() => $generator->boolean,
+            'integer' => fn() => mt_rand(0, intval('4294967295')),
+            'float' => fn() => mt_rand(0, intval('4294967295')) / mt_rand(1, intval('4294967295')),
+            'string' => fn() => $generator->text(255),
+            'date' => fn() => $generator->datetime,
+            default => null,
+        };
     }
 }

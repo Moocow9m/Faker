@@ -23,7 +23,7 @@ return static function (RectorConfig $rectorConfig): void {
         ]
     );
 
-    $rectorConfig->phpVersion(PhpVersion::PHP_74);
+    $rectorConfig->phpVersion(PhpVersion::PHP_81);
 
     //$rectorConfig->parallel(240, 4);
     $rectorConfig->disableParallel(); // parallel causes freezing, may solve later

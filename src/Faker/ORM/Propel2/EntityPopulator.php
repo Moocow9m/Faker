@@ -10,7 +10,6 @@ use Propel\Runtime\Map\ColumnMap;
  */
 class EntityPopulator
 {
-    protected $class;
     protected $columnFormatters = [];
     protected $modifiers = [];
 
@@ -19,9 +18,8 @@ class EntityPopulator
      *
      * @param string $class A Propel ActiveRecord classname
      */
-    public function __construct($class)
+    public function __construct(protected $class)
     {
-        $this->class = $class;
     }
 
     /**
@@ -38,7 +36,6 @@ class EntityPopulator
     }
 
     /**
-     * @param \Faker\Generator $generator
      * @return array
      */
     public function guessColumnFormatters(\Faker\Generator $generator)
@@ -48,7 +45,7 @@ class EntityPopulator
         $peerClass = $class::TABLE_MAP;
         $tableMap = $peerClass::getTableMap();
         $nameGuesser = new \Faker\Guesser\Name($generator);
-        $columnTypeGuesser = new \Faker\ORM\Propel2\ColumnTypeGuesser($generator);
+        $columnTypeGuesser = new ColumnTypeGuesser($generator);
         foreach ($tableMap->getColumns() as $columnMap) {
             // skip behavior columns, handled by modifiers
             if ($this->isColumnBehavior($columnMap)) {
@@ -57,7 +54,7 @@ class EntityPopulator
             if ($columnMap->isForeignKey()) {
                 $relatedClass = $columnMap->getRelation()->getForeignTable()->getClassname();
                 $formatters[$columnMap->getPhpName()] = function ($inserted) use ($relatedClass) {
-                    $relatedClass = trim($relatedClass, "\\");
+                    $relatedClass = trim((string) $relatedClass, "\\");
                     return isset($inserted[$relatedClass]) ? $inserted[$relatedClass][mt_rand(0, (is_countable($inserted[$relatedClass]) ? count($inserted[$relatedClass]) : 0) - 1)] : null;
                 };
                 continue;
@@ -111,7 +108,6 @@ class EntityPopulator
     }
 
     /**
-     * @param \Faker\Generator $generator
      * @return array
      */
     public function guessModifiers(\Faker\Generator $generator)

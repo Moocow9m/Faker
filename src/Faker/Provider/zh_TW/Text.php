@@ -803,7 +803,7 @@ EOT;
     protected static function strlen($text)
     {
         return function_exists('mb_strlen')
-            ? mb_strlen($text, static::$encoding)
+            ? mb_strlen((string) $text, static::$encoding)
             : count(static::explode($text));
     }
 
@@ -811,7 +811,7 @@ EOT;
     {
         $chars = [];
 
-        foreach (preg_split('//u', str_replace(PHP_EOL, '', $text)) as $char) {
+        foreach (preg_split('//u', str_replace(PHP_EOL, '', (string) $text)) as $char) {
             if (!empty($char)) {
                 $chars[] = $char;
             }
@@ -833,7 +833,7 @@ EOT;
         if ($mbAvailable) {
             // in order to support php 5.3, third param use 1 instead of null
             // https://secure.php.net/manual/en/function.mb-substr.php#refsect1-function.mb-substr-changelog
-            $last = mb_substr($text, mb_strlen($text, static::$encoding) - 1, 1, static::$encoding);
+            $last = mb_substr((string) $text, mb_strlen((string) $text, static::$encoding) - 1, 1, static::$encoding);
         } else {
             $chars = static::utf8Encoding($text);
             $last = $chars[count($chars) - 1];
@@ -842,7 +842,7 @@ EOT;
         // if the last char is a not-valid-end punctuation, remove it
         if (in_array($last, static::$notEndPunct)) {
             if ($mbAvailable) {
-                $text = mb_substr($text, 0, mb_strlen($text, static::$encoding) - 1, static::$encoding);
+                $text = mb_substr((string) $text, 0, mb_strlen((string) $text, static::$encoding) - 1, static::$encoding);
             } else {
                 array_pop($chars);
                 $text = implode('', $chars);

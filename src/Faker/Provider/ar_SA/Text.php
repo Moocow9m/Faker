@@ -266,6 +266,6 @@ EOT;
 
     protected static function validStart($word)
     {
-        return preg_match('/^\p{Arabic}/u', $word);
+        return preg_match('/^\p{Arabic}/u', (string) $word);
     }
 }

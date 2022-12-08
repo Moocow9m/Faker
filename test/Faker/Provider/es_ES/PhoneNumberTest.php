@@ -14,7 +14,7 @@ final class PhoneNumberTest extends \PHPUnit\Framework\TestCase
 
     public function testTollFreeNumber()
     {
-        self::assertEquals(11, strlen($this->faker->tollFreeNumber()));
+        self::assertEquals(11, strlen((string) $this->faker->tollFreeNumber()));
     }
 
     protected function setUp(): void

@@ -9,13 +9,13 @@ use PHPUnit\Framework\TestCase;
 
 final class PersonTest extends TestCase
 {
-    private \Faker\Generator $faker;
+    private Generator $faker;
 
     public function testAvs13Number()
     {
         $avs = $this->faker->avs13;
         $this->assertMatchesRegularExpression('/^756\.([0-9]{4})\.([0-9]{4})\.([0-9]{2})$/', $avs);
-        $this->assertTrue(Ean::isValid(str_replace('.', '', $avs)));
+        $this->assertTrue(Ean::isValid(str_replace('.', '', (string) $avs)));
     }
 
     protected function setUp(): void

@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 final class CompanyTest extends TestCase
 {
-    private \Faker\Generator $faker;
+    private Generator $faker;
 
     public function testSiretReturnsAValidSiret()
     {
@@ -22,7 +22,7 @@ final class CompanyTest extends TestCase
     {
         $siret = $this->faker->siret();
         $this->assertMatchesRegularExpression("/^\d{3}\s\d{3}\s\d{3}\s\d{5}$/", $siret);
-        $siret = str_replace(' ', '', $siret);
+        $siret = str_replace(' ', '', (string) $siret);
         $this->assertTrue(Luhn::isValid($siret));
     }
 
@@ -37,7 +37,7 @@ final class CompanyTest extends TestCase
     {
         $siren = $this->faker->siren();
         $this->assertMatchesRegularExpression("/^\d{3}\s\d{3}\s\d{3}$/", $siren);
-        $siren = str_replace(' ', '', $siren);
+        $siren = str_replace(' ', '', (string) $siren);
         $this->assertTrue(Luhn::isValid($siren));
     }
 

@@ -16,7 +16,6 @@ class Populator
     protected $quantities = [];
 
     /**
-     * @param \Faker\Generator $generator
      * @param Mandango $mandango
      */
     public function __construct(\Faker\Generator $generator, Mandango $mandango)
@@ -31,10 +30,10 @@ class Populator
      * @param mixed $entity A Propel ActiveRecord classname, or a \Faker\ORM\Propel\EntityPopulator instance
      * @param int $number The number of entities to populate
      */
-    public function addEntity($entity, $number, $customColumnFormatters = [])
+    public function addEntity(mixed $entity, $number, $customColumnFormatters = [])
     {
-        if (!$entity instanceof \Faker\ORM\Mandango\EntityPopulator) {
-            $entity = new \Faker\ORM\Mandango\EntityPopulator($entity);
+        if (!$entity instanceof EntityPopulator) {
+            $entity = new EntityPopulator($entity);
         }
         $entity->setColumnFormatters($entity->guessColumnFormatters($this->generator, $this->mandango));
         if ($customColumnFormatters) {

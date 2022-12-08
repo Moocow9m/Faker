@@ -32,7 +32,7 @@ class Payment extends \Faker\Provider\Payment
 
     protected static function addBankCodeChecksum($iban, $countryCode = 'PL')
     {
-        if ($countryCode != 'PL' || strlen($iban) <= 8) {
+        if ($countryCode != 'PL' || strlen((string) $iban) <= 8) {
             return $iban;
         }
         $checksum = 0;
@@ -42,6 +42,6 @@ class Payment extends \Faker\Provider\Payment
         }
         $checksum = $checksum % 10;
 
-        return substr($iban, 0, 7) . $checksum . substr($iban, 8);
+        return substr((string) $iban, 0, 7) . $checksum . substr((string) $iban, 8);
     }
 }

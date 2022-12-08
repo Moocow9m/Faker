@@ -30,7 +30,7 @@ final class PersonTest extends TestCase
 
     public function testPersonalIdentityNumberGeneratesLuhnCompliantNumbers()
     {
-        $pin = str_replace('-', '', $this->faker->personalIdentityNumber());
+        $pin = str_replace('-', '', (string) $this->faker->personalIdentityNumber());
         $this->assertTrue(Luhn::isValid($pin));
     }
 

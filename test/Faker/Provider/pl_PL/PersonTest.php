@@ -8,13 +8,13 @@ use PHPUnit\Framework\TestCase;
 
 final class PersonTest extends TestCase
 {
-    private \Faker\Generator $faker;
+    private Generator $faker;
 
     public function testPeselLenght()
     {
         $pesel = $this->faker->pesel();
 
-        $this->assertEquals(11, strlen($pesel));
+        $this->assertEquals(11, strlen((string) $pesel));
     }
 
     public function testPeselDate()
@@ -22,9 +22,9 @@ final class PersonTest extends TestCase
         $date = new DateTime('1990-01-01');
         $pesel = $this->faker->pesel($date);
 
-        $this->assertEquals('90', substr($pesel, 0, 2));
-        $this->assertEquals('01', substr($pesel, 2, 2));
-        $this->assertEquals('01', substr($pesel, 4, 2));
+        $this->assertEquals('90', substr((string) $pesel, 0, 2));
+        $this->assertEquals('01', substr((string) $pesel, 2, 2));
+        $this->assertEquals('01', substr((string) $pesel, 4, 2));
     }
 
     public function testPeselDateWithYearAfter2000()
@@ -32,9 +32,9 @@ final class PersonTest extends TestCase
         $date = new DateTime('2001-01-01');
         $pesel = $this->faker->pesel($date);
 
-        $this->assertEquals('01', substr($pesel, 0, 2));
-        $this->assertEquals('21', substr($pesel, 2, 2));
-        $this->assertEquals('01', substr($pesel, 4, 2));
+        $this->assertEquals('01', substr((string) $pesel, 0, 2));
+        $this->assertEquals('21', substr((string) $pesel, 2, 2));
+        $this->assertEquals('01', substr((string) $pesel, 4, 2));
     }
 
     public function testPeselDateWithYearAfter2100()
@@ -42,9 +42,9 @@ final class PersonTest extends TestCase
         $date = new DateTime('2101-01-01');
         $pesel = $this->faker->pesel($date);
 
-        $this->assertEquals('01', substr($pesel, 0, 2));
-        $this->assertEquals('41', substr($pesel, 2, 2));
-        $this->assertEquals('01', substr($pesel, 4, 2));
+        $this->assertEquals('01', substr((string) $pesel, 0, 2));
+        $this->assertEquals('41', substr((string) $pesel, 2, 2));
+        $this->assertEquals('01', substr((string) $pesel, 4, 2));
     }
 
     public function testPeselDateWithYearAfter2200()
@@ -52,9 +52,9 @@ final class PersonTest extends TestCase
         $date = new DateTime('2201-01-01');
         $pesel = $this->faker->pesel($date);
 
-        $this->assertEquals('01', substr($pesel, 0, 2));
-        $this->assertEquals('61', substr($pesel, 2, 2));
-        $this->assertEquals('01', substr($pesel, 4, 2));
+        $this->assertEquals('01', substr((string) $pesel, 0, 2));
+        $this->assertEquals('61', substr((string) $pesel, 2, 2));
+        $this->assertEquals('01', substr((string) $pesel, 4, 2));
     }
 
     public function testPeselDateWithYearBefore1900()
@@ -62,9 +62,9 @@ final class PersonTest extends TestCase
         $date = new DateTime('1801-01-01');
         $pesel = $this->faker->pesel($date);
 
-        $this->assertEquals('01', substr($pesel, 0, 2));
-        $this->assertEquals('81', substr($pesel, 2, 2));
-        $this->assertEquals('01', substr($pesel, 4, 2));
+        $this->assertEquals('01', substr((string) $pesel, 0, 2));
+        $this->assertEquals('81', substr((string) $pesel, 2, 2));
+        $this->assertEquals('01', substr((string) $pesel, 4, 2));
     }
 
     public function testPeselSex()

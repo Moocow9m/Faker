@@ -175,7 +175,7 @@ final class ProviderOverrideTest extends TestCase
         // Finding all PHP files in the xx_XX directories
         $providerDir = __DIR__ . '/../../../src/Faker/Provider';
         foreach (glob($providerDir . '/*_*/*.php') as $file) {
-            $localisation = basename(dirname($file));
+            $localisation = basename(dirname((string) $file));
 
             if (isset($locales[$localisation])) {
                 continue;

@@ -10,7 +10,6 @@ use Mandango\Mandango;
  */
 class EntityPopulator
 {
-    protected $class;
     protected $columnFormatters = [];
 
     /**
@@ -18,9 +17,8 @@ class EntityPopulator
      *
      * @param string $class A Mandango ActiveRecord classname
      */
-    public function __construct($class)
+    public function __construct(protected $class)
     {
-        $this->class = $class;
     }
 
     /**
@@ -50,7 +48,6 @@ class EntityPopulator
     }
 
     /**
-     * @param \Faker\Generator $generator
      * @param Mandango $mandango
      * @return array
      */
@@ -58,7 +55,7 @@ class EntityPopulator
     {
         $formatters = [];
         $nameGuesser = new \Faker\Guesser\Name($generator);
-        $columnTypeGuesser = new \Faker\ORM\Mandango\ColumnTypeGuesser($generator);
+        $columnTypeGuesser = new ColumnTypeGuesser($generator);
 
         $metadata = $mandango->getMetadata($this->class);
 
@@ -111,7 +108,7 @@ class EntityPopulator
                 }
 
                 if (isset($metadata['referencesMany'][$column])) {
-                    $adder = 'add' . ucfirst($column);
+                    $adder = 'add' . ucfirst((string) $column);
                     $obj->$adder($value);
                 }
             }

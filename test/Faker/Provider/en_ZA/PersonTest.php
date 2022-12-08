@@ -9,13 +9,13 @@ use PHPUnit\Framework\TestCase;
 
 final class PersonTest extends TestCase
 {
-    private \Faker\Generator $faker;
+    private Generator $faker;
 
     public function testIdNumberWithDefaults()
     {
         $idNumber = $this->faker->idNumber();
 
-        $this->assertEquals(13, strlen($idNumber));
+        $this->assertEquals(13, strlen((string) $idNumber));
         $this->assertMatchesRegularExpression('#^\d{13}$#', $idNumber);
         $this->assertIsString($idNumber);
     }
@@ -24,7 +24,7 @@ final class PersonTest extends TestCase
     {
         $idNumber = $this->faker->idNumber(new \DateTime(), true, 'male');
 
-        $genderDigit = substr($idNumber, 6, 1);
+        $genderDigit = substr((string) $idNumber, 6, 1);
 
         $this->assertContains($genderDigit, ['5', '6', '7', '8', '9']);
     }
@@ -33,7 +33,7 @@ final class PersonTest extends TestCase
     {
         $idNumber = $this->faker->idNumber(new \DateTime(), true, 'female');
 
-        $genderDigit = substr($idNumber, 6, 1);
+        $genderDigit = substr((string) $idNumber, 6, 1);
 
         $this->assertContains($genderDigit, ['0', '1', '2', '3', '4']);
     }

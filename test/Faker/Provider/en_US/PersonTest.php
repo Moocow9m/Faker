@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 final class PersonTest extends TestCase
 {
-    private \Faker\Generator $faker;
+    private Generator $faker;
 
     public function testSsn()
     {
@@ -18,7 +18,7 @@ final class PersonTest extends TestCase
             // should be in the format ###-##-####
             $this->assertMatchesRegularExpression('/^[0-9]{3}-[0-9]{2}-[0-9]{4}$/', $number);
 
-            $parts = explode("-", $number);
+            $parts = explode("-", (string) $number);
 
             // first part must be between 001 and 899, excluding 666
             $this->assertNotEquals(666, $parts[0]);

@@ -65,23 +65,19 @@ class Address extends Base
     }
 
     /**
-     * @param float|int $min
-     * @param float|int $max
      * @return float Uses signed degrees format (returns a float number between -90 and 90)
      * @example '77.147489'
      */
-    public static function latitude($min = -90, $max = 90)
+    public static function latitude(float|int $min = -90, float|int $max = 90)
     {
         return static::randomFloat(6, $min, $max);
     }
 
     /**
-     * @param float|int $min
-     * @param float|int $max
      * @return float Uses signed degrees format (returns a float number between -180 and 180)
      * @example '86.211205'
      */
-    public static function longitude($min = -180, $max = 180)
+    public static function longitude(float|int $min = -180, float|int $max = 180)
     {
         return static::randomFloat(6, $min, $max);
     }

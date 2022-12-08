@@ -104,7 +104,7 @@ abstract class Text extends Base
     protected function getExplodedText()
     {
         if ($this->explodedText === null) {
-            $this->explodedText = static::explode(preg_replace('/\s+/u', ' ', static::$baseText));
+            $this->explodedText = static::explode(preg_replace('/\s+/u', ' ', (string) static::$baseText));
         }
 
         return $this->explodedText;
@@ -112,7 +112,7 @@ abstract class Text extends Base
 
     protected static function explode($text)
     {
-        return explode(static::$separator, $text);
+        return explode(static::$separator, (string) $text);
     }
 
     protected static function implode($words)
@@ -124,18 +124,18 @@ abstract class Text extends Base
     {
         $isValid = true;
         if (static::$textStartsWithUppercase) {
-            $isValid = preg_match('/^\p{Lu}/u', $word);
+            $isValid = preg_match('/^\p{Lu}/u', (string) $word);
         }
         return $isValid;
     }
 
     protected static function strlen($text)
     {
-        return function_exists('mb_strlen') ? mb_strlen($text, 'UTF-8') : strlen($text);
+        return function_exists('mb_strlen') ? mb_strlen((string) $text, 'UTF-8') : strlen((string) $text);
     }
 
     protected static function appendEnd($text)
     {
-        return preg_replace("/([ ,-:;\x{2013}\x{2014}]+$)/us", '', $text) . '.';
+        return preg_replace("/([ ,-:;\x{2013}\x{2014}]+$)/us", '', (string) $text) . '.';
     }
 }

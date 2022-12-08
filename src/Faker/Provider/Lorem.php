@@ -11,10 +11,9 @@ class Lorem extends Base
      *
      * @param integer $nb how many paragraphs to return
      * @param bool $asText if true the paragraphs are returned as one string, separated by two newlines
-     * @return array|string
      * @example array($paragraph1, $paragraph2, $paragraph3)
      */
-    public static function paragraphs($nb = 3, $asText = false)
+    public static function paragraphs($nb = 3, $asText = false): array|string
     {
         $paragraphs = [];
         for ($i = 0; $i < $nb; $i++) {
@@ -55,10 +54,9 @@ class Lorem extends Base
      *
      * @param integer $nb how many sentences to return
      * @param bool $asText if true the sentences are returned as one string
-     * @return array|string
      * @example array('Lorem ipsum dolor sit amet.', 'Consectetur adipisicing eli.')
      */
-    public static function sentences($nb = 3, $asText = false)
+    public static function sentences($nb = 3, $asText = false): array|string
     {
         $sentences = [];
         for ($i = 0; $i < $nb; $i++) {
@@ -87,7 +85,7 @@ class Lorem extends Base
         }
 
         $words = static::words($nbWords);
-        $words[0] = ucwords($words[0]);
+        $words[0] = ucwords((string) $words[0]);
 
         return implode(' ', $words) . '.';
     }
@@ -97,10 +95,9 @@ class Lorem extends Base
      *
      * @param integer $nb how many words to return
      * @param bool $asText if true the sentences are returned as one string
-     * @return array|string
      * @example array('Lorem', 'ipsum', 'dolor')
      */
-    public static function words($nb = 3, $asText = false)
+    public static function words($nb = 3, $asText = false): array|string
     {
         $words = [];
         for ($i = 0; $i < $nb; $i++) {

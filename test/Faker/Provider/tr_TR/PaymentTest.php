@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 final class PaymentTest extends TestCase
 {
-    private \Faker\Generator $faker;
+    private Generator $faker;
 
     public function testBankAccountNumber()
     {

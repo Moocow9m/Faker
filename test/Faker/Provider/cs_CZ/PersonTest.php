@@ -17,7 +17,7 @@ final class PersonTest extends TestCase
 
         for ($i = 0; $i < 1000; $i++) {
             $birthNumber = $faker->birthNumber();
-            $birthNumber = str_replace('/', '', $birthNumber);
+            $birthNumber = str_replace('/', '', (string) $birthNumber);
 
             // check date
             $year = intval(substr($birthNumber, 0, 2), 10);

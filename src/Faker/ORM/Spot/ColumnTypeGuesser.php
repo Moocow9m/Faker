@@ -11,7 +11,6 @@ class ColumnTypeGuesser
 
     /**
      * ColumnTypeGuesser constructor.
-     * @param Generator $generator
      */
     public function __construct(Generator $generator)
     {
@@ -19,7 +18,6 @@ class ColumnTypeGuesser
     }
 
     /**
-     * @param array $field
      * @return \Closure|null
      */
     public function guessFormat(array $field)

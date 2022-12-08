@@ -15,9 +15,6 @@ class Populator
     protected $entities = [];
     protected $quantities = [];
 
-    /**
-     * @param \Faker\Generator $generator
-     */
     public function __construct(\Faker\Generator $generator)
     {
         $this->generator = $generator;
@@ -29,10 +26,10 @@ class Populator
      * @param mixed $entity A Propel ActiveRecord classname, or a \Faker\ORM\Propel2\EntityPopulator instance
      * @param int $number The number of entities to populate
      */
-    public function addEntity($entity, $number, $customColumnFormatters = [], $customModifiers = [])
+    public function addEntity(mixed $entity, $number, $customColumnFormatters = [], $customModifiers = [])
     {
-        if (!$entity instanceof \Faker\ORM\Propel2\EntityPopulator) {
-            $entity = new \Faker\ORM\Propel2\EntityPopulator($entity);
+        if (!$entity instanceof EntityPopulator) {
+            $entity = new EntityPopulator($entity);
         }
         $entity->setColumnFormatters($entity->guessColumnFormatters($this->generator));
         if ($customColumnFormatters) {

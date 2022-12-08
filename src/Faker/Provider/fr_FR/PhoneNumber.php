@@ -17,7 +17,7 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
     public function phoneNumber07()
     {
         $phoneNumber = $this->phoneNumber07WithSeparator();
-        $phoneNumber = str_replace(' ', '', $phoneNumber);
+        $phoneNumber = str_replace(' ', '', (string) $phoneNumber);
         return $phoneNumber;
     }
 
@@ -36,7 +36,7 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
     public function phoneNumber08()
     {
         $phoneNumber = $this->phoneNumber08WithSeparator();
-        $phoneNumber = str_replace(' ', '', $phoneNumber);
+        $phoneNumber = str_replace(' ', '', (string) $phoneNumber);
         return $phoneNumber;
     }
 

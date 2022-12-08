@@ -10,18 +10,15 @@ use Faker\ValidGenerator;
 class Base
 {
     /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     protected $generator;
 
     /**
-     * @var \Faker\UniqueGenerator
+     * @var UniqueGenerator
      */
     protected $unique;
 
-    /**
-     * @param \Faker\Generator $generator
-     */
     public function __construct(Generator $generator)
     {
         $this->generator = $generator;
@@ -62,13 +59,11 @@ class Base
      * Return a random float number
      *
      * @param int $nbMaxDecimals
-     * @param int|float $min
-     * @param int|float $max
      * @return float
      * @example 48.8932
      *
      */
-    public static function randomFloat($nbMaxDecimals = null, $min = 0, $max = null)
+    public static function randomFloat($nbMaxDecimals = null, int|float $min = 0, int|float $max = null)
     {
         if (null === $nbMaxDecimals) {
             $nbMaxDecimals = static::randomDigit();
@@ -143,11 +138,10 @@ class Base
     /**
      * Returns the passed value
      *
-     * @param mixed $value
      *
      * @return mixed
      */
-    public static function passthrough($value)
+    public static function passthrough(mixed $value)
     {
         return $value;
     }
@@ -201,15 +195,12 @@ class Base
      * @param array|string $arg The set to shuffle
      * @return array|string The shuffled set
      */
-    public static function shuffle($arg = '')
+    public static function shuffle(array|string $arg = ''): array|string
     {
         if (is_array($arg)) {
             return static::shuffleArray($arg);
         }
-        if (is_string($arg)) {
-            return static::shuffleString($arg);
-        }
-        throw new \InvalidArgumentException('shuffle() only supports strings or arrays');
+        return static::shuffleString($arg);
     }
 
     /**
@@ -296,10 +287,10 @@ class Base
 
     private static function replaceWildcard($string, $wildcard = '#', $callback = 'static::randomDigit')
     {
-        if (($pos = strpos($string, (string) $wildcard)) === false) {
+        if (($pos = strpos((string) $string, (string) $wildcard)) === false) {
             return $string;
         }
-        for ($i = $pos, $last = strrpos($string, (string) $wildcard, $pos) + 1; $i < $last; $i++) {
+        for ($i = $pos, $last = strrpos((string) $string, (string) $wildcard, $pos) + 1; $i < $last; $i++) {
             if ($string[$i] === $wildcard) {
                 $string[$i] = call_user_func($callback);
             }
@@ -526,7 +517,7 @@ class Base
      *                              between 0 (always get false) and 100 (always get true).
      * @return mixed|null
      */
-    public function optional($weight = 0.5, $default = null)
+    public function optional(float|int $weight = 0.5, $default = null)
     {
         // old system based on 0.1 <= $weight <= 0.9
         // TODO: remove in v2

@@ -8,12 +8,12 @@ use PHPUnit\Framework\TestCase;
 
 final class PersonTest extends TestCase
 {
-    private \Faker\Generator $faker;
+    private Generator $faker;
 
     public function testGenerateValidIdNumber()
     {
         $idNumber = $this->faker->idNumber();
-        $this->assertEquals(9, strlen($idNumber));
+        $this->assertEquals(9, strlen((string) $idNumber));
 
 
         $sum = -1 * $idNumber % 10;

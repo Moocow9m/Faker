@@ -42,7 +42,7 @@ final class PersonTest extends TestCase
     {
         $nik = $this->faker->nik();
 
-        $this->assertContains(substr($nik, 0, 4), static::$birthPlaceCode);
+        $this->assertContains(substr((string) $nik, 0, 4), static::$birthPlaceCode);
     }
 
     protected function setUp(): void

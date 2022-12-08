@@ -73,7 +73,7 @@ class Person extends \Faker\Provider\Person
         if (empty($dateOfBirth)) {
             $dateOfBirthParts = [static::numberBetween(1800, 2099)];
         } else {
-            $dateOfBirthParts = explode('-', $dateOfBirth);
+            $dateOfBirthParts = explode('-', (string) $dateOfBirth);
         }
         $baseDate = \Faker\Provider\DateTime::dateTimeBetween("first day of {$dateOfBirthParts[0]}", "last day of {$dateOfBirthParts[0]}");
 

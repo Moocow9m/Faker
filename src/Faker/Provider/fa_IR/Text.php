@@ -527,12 +527,12 @@ EOT;
             array_shift($currentWords);
             $next = implode(' ', $currentWords);
 
-            if ($resultLength == 0 && !preg_match('/^[\x{0600}-\x{06FF}]/u', $word)) {
+            if ($resultLength == 0 && !preg_match('/^[\x{0600}-\x{06FF}]/u', (string) $word)) {
                 continue;
             }
             // append the element
             $result[] = $word;
-            $resultLength += strlen($word) + 1;
+            $resultLength += strlen((string) $word) + 1;
         }
 
         // remove the element that caused the text to overflow

@@ -116,7 +116,7 @@ final class BaseTest extends TestCase
 
     public function testRandomAsciiReturnsSingleCharacter()
     {
-        $this->assertEquals(1, strlen(BaseProvider::randomAscii()));
+        $this->assertEquals(1, strlen((string) BaseProvider::randomAscii()));
     }
 
     public function testRandomAsciiReturnsAsciiCharacter()
@@ -161,12 +161,6 @@ final class BaseTest extends TestCase
     public function testShuffleReturnsArrayWhenPassedAnArrayArgument()
     {
         $this->assertIsArray(BaseProvider::shuffle([1, 2, 3]));
-    }
-
-    public function testShuffleThrowsExceptionWhenPassedAnInvalidArgument()
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        BaseProvider::shuffle(false);
     }
 
     public function testShuffleArraySupportsEmptyArrays()
@@ -332,21 +326,21 @@ final class BaseTest extends TestCase
     public function testOptionalReturnsProviderValueWhenCalledWithWeight1()
     {
         $faker = new \Faker\Generator();
-        $faker->addProvider(new \Faker\Provider\Base($faker));
+        $faker->addProvider(new BaseProvider($faker));
         $this->assertNotNull($faker->optional(100)->randomDigit);
     }
 
     public function testOptionalReturnsNullWhenCalledWithWeight0()
     {
         $faker = new \Faker\Generator();
-        $faker->addProvider(new \Faker\Provider\Base($faker));
+        $faker->addProvider(new BaseProvider($faker));
         $this->assertNull($faker->optional(0)->randomDigit);
     }
 
     public function testOptionalAllowsChainingPropertyAccess()
     {
         $faker = new \Faker\Generator();
-        $faker->addProvider(new \Faker\Provider\Base($faker));
+        $faker->addProvider(new BaseProvider($faker));
         $faker->addProvider(new \ArrayObject([1])); // hack because method_exists forbids stubs
         $this->assertEquals(1, $faker->optional(100)->count);
         $this->assertNull($faker->optional(0)->count);
@@ -355,7 +349,7 @@ final class BaseTest extends TestCase
     public function testOptionalAllowsChainingMethodCall()
     {
         $faker = new \Faker\Generator();
-        $faker->addProvider(new \Faker\Provider\Base($faker));
+        $faker->addProvider(new BaseProvider($faker));
         $faker->addProvider(new \ArrayObject([1])); // hack because method_exists forbids stubs
         $this->assertEquals(1, $faker->optional(100)->count());
         $this->assertNull($faker->optional(0)->count());
@@ -364,7 +358,7 @@ final class BaseTest extends TestCase
     public function testOptionalAllowsChainingProviderCallRandomlyReturnNull()
     {
         $faker = new \Faker\Generator();
-        $faker->addProvider(new \Faker\Provider\Base($faker));
+        $faker->addProvider(new BaseProvider($faker));
         $values = [];
         for ($i = 0; $i < 10; $i++) {
             $values[] = $faker->optional()->randomDigit;
@@ -384,7 +378,7 @@ final class BaseTest extends TestCase
     public function testOptionalPercentageAndWeight()
     {
         $faker = new \Faker\Generator();
-        $faker->addProvider(new \Faker\Provider\Base($faker));
+        $faker->addProvider(new BaseProvider($faker));
         $faker->addProvider(new \Faker\Provider\Miscellaneous($faker));
 
         $valuesOld = [];
@@ -404,7 +398,7 @@ final class BaseTest extends TestCase
     public function testUniqueAllowsChainingPropertyAccess()
     {
         $faker = new \Faker\Generator();
-        $faker->addProvider(new \Faker\Provider\Base($faker));
+        $faker->addProvider(new BaseProvider($faker));
         $faker->addProvider(new \ArrayObject([1])); // hack because method_exists forbids stubs
         $this->assertEquals(1, $faker->unique()->count);
     }
@@ -412,7 +406,7 @@ final class BaseTest extends TestCase
     public function testUniqueAllowsChainingMethodCall()
     {
         $faker = new \Faker\Generator();
-        $faker->addProvider(new \Faker\Provider\Base($faker));
+        $faker->addProvider(new BaseProvider($faker));
         $faker->addProvider(new \ArrayObject([1])); // hack because method_exists forbids stubs
         $this->assertEquals(1, $faker->unique()->count());
     }
@@ -420,7 +414,7 @@ final class BaseTest extends TestCase
     public function testUniqueReturnsOnlyUniqueValues()
     {
         $faker = new \Faker\Generator();
-        $faker->addProvider(new \Faker\Provider\Base($faker));
+        $faker->addProvider(new BaseProvider($faker));
         $values = [];
         for ($i = 0; $i < 10; $i++) {
             $values[] = $faker->unique()->randomDigit;
@@ -433,7 +427,7 @@ final class BaseTest extends TestCase
     {
         $this->expectException(\OverflowException::class);
         $faker = new \Faker\Generator();
-        $faker->addProvider(new \Faker\Provider\Base($faker));
+        $faker->addProvider(new BaseProvider($faker));
         for ($i = 0; $i < 11; $i++) {
             $faker->unique()->randomDigit;
         }
@@ -442,7 +436,7 @@ final class BaseTest extends TestCase
     public function testUniqueCanResetUniquesWhenPassedTrueAsArgument()
     {
         $faker = new \Faker\Generator();
-        $faker->addProvider(new \Faker\Provider\Base($faker));
+        $faker->addProvider(new BaseProvider($faker));
         $values = [];
         for ($i = 0; $i < 10; $i++) {
             $values[] = $faker->unique()->randomDigit;
@@ -458,21 +452,21 @@ final class BaseTest extends TestCase
     public function testValidAllowsChainingPropertyAccess()
     {
         $faker = new \Faker\Generator();
-        $faker->addProvider(new \Faker\Provider\Base($faker));
+        $faker->addProvider(new BaseProvider($faker));
         $this->assertLessThan(10, $faker->valid()->randomDigit);
     }
 
     public function testValidAllowsChainingMethodCall()
     {
         $faker = new \Faker\Generator();
-        $faker->addProvider(new \Faker\Provider\Base($faker));
+        $faker->addProvider(new BaseProvider($faker));
         $this->assertLessThan(10, $faker->valid()->numberBetween(5, 9));
     }
 
     public function testValidReturnsOnlyValidValues()
     {
         $faker = new \Faker\Generator();
-        $faker->addProvider(new \Faker\Provider\Base($faker));
+        $faker->addProvider(new BaseProvider($faker));
         $values = [];
         $evenValidator = fn($digit) => $digit % 2 === 0;
         for ($i = 0; $i < 50; $i++) {
@@ -487,7 +481,7 @@ final class BaseTest extends TestCase
     {
         $this->expectException(\OverflowException::class);
         $faker = new \Faker\Generator();
-        $faker->addProvider(new \Faker\Provider\Base($faker));
+        $faker->addProvider(new BaseProvider($faker));
         $evenValidator = fn($digit) => $digit % 2 === 0;
         for ($i = 0; $i < 11; $i++) {
             $faker->valid($evenValidator)->randomElement([1, 3, 5, 7, 9]);
@@ -498,7 +492,7 @@ final class BaseTest extends TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $faker = new \Faker\Generator();
-        $faker->addProvider(new \Faker\Provider\Base($faker));
+        $faker->addProvider(new BaseProvider($faker));
         $faker->valid(12)->randomElement([1, 3, 5, 7, 9]);
     }
 

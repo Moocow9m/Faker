@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 final class PhoneNumberTest extends TestCase
 {
-    private \Faker\Generator $faker;
+    private Generator $faker;
 
     public function testMobileNumber()
     {
@@ -16,24 +16,24 @@ final class PhoneNumberTest extends TestCase
             $number = $this->faker->mobileNumber;
 
             // Check that number starts with 4 or 9 when country code is included
-            if (strlen($number) === 11) {
-                $testChar = substr($number, 3, 1);
-                $this->assertEquals(11, strlen($number));
+            if (strlen((string) $number) === 11) {
+                $testChar = substr((string) $number, 3, 1);
+                $this->assertEquals(11, strlen((string) $number));
                 $this->assertContainsEquals($testChar, [4, 9]);
                 $this->assertMatchesRegularExpression('/^\+47[49]{1}[0-9]{7}$/', $number);
             }
 
             // Check numbers start with 4 or 9 when no country code is included
-            if (strlen($number) === 10 || strlen($number) === 8) {
-                $testChar = substr($number, 0, 1);
+            if (strlen((string) $number) === 10 || strlen((string) $number) === 8) {
+                $testChar = substr((string) $number, 0, 1);
                 $this->assertContainsEquals($testChar, [4, 9]);
             }
 
-            if (strlen($number) === 10) {
+            if (strlen((string) $number) === 10) {
                 $this->assertMatchesRegularExpression('/^[49]{1}[0-9]{2} [0-9]{2} [0-9]{3}$/', $number);
             }
 
-            if (strlen($number) === 8) {
+            if (strlen((string) $number) === 8) {
                 $this->assertMatchesRegularExpression('/^[49]{1}[0-9]{7}$/', $number);
             }
         }

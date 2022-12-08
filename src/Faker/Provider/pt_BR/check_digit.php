@@ -11,7 +11,7 @@ namespace Faker\Provider\pt_BR;
  * @param string|integer $numbers Numbers on which generate the check digit
  * @return integer
  */
-function check_digit($numbers)
+function check_digit(string|int $numbers)
 {
     $length = strlen($numbers);
     $second_algorithm = $length >= 12;

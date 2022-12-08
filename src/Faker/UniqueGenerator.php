@@ -9,17 +9,14 @@ namespace Faker;
 class UniqueGenerator
 {
     protected $generator;
-    protected $maxRetries;
     protected $uniques = [];
 
     /**
-     * @param Generator $generator
      * @param integer $maxRetries
      */
-    public function __construct(Generator $generator, $maxRetries = 10000)
+    public function __construct(Generator $generator, protected $maxRetries = 10000)
     {
         $this->generator = $generator;
-        $this->maxRetries = $maxRetries;
     }
 
     /**

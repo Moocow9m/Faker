@@ -6,9 +6,6 @@ class Documentor
 {
     protected $generator;
 
-    /**
-     * @param Generator $generator
-     */
     public function __construct(Generator $generator)
     {
         $this->generator = $generator;
@@ -23,7 +20,7 @@ class Documentor
         $providers = array_reverse($this->generator->getProviders());
         $providers[] = new Provider\Base($this->generator);
         foreach ($providers as $provider) {
-            $providerClass = get_class($provider);
+            $providerClass = $provider::class;
             $formatters[$providerClass] = [];
             $refl = new \ReflectionObject($provider);
             foreach ($refl->getMethods(\ReflectionMethod::IS_PUBLIC) as $reflmethod) {
@@ -45,7 +42,7 @@ class Documentor
                 $parameters = $parameters ? '(' . join(', ', $parameters) . ')' : '';
                 try {
                     $example = $this->generator->format($methodName);
-                } catch (\InvalidArgumentException $e) {
+                } catch (\InvalidArgumentException) {
                     $example = '';
                 }
                 if (is_array($example)) {

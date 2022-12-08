@@ -8,16 +8,16 @@ use PHPUnit\Framework\TestCase;
 
 final class PersonTest extends TestCase
 {
-    private \Faker\Generator $faker;
+    private Generator $faker;
 
     public function testLastNameFemale()
     {
-        $this->assertEquals("а", substr($this->faker->lastName('female'), -2, 2));
+        $this->assertEquals("а", substr((string) $this->faker->lastName('female'), -2, 2));
     }
 
     public function testLastNameMale()
     {
-        $this->assertNotEquals("а", substr($this->faker->lastName('male'), -2, 2));
+        $this->assertNotEquals("а", substr((string) $this->faker->lastName('male'), -2, 2));
     }
 
     public function testLastNameRandom()

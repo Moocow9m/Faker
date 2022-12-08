@@ -10,7 +10,6 @@ use Faker\Provider\Base;
  */
 class EntityPopulator
 {
-    protected $class;
     protected $columnFormatters = [];
     protected $modifiers = [];
 
@@ -19,9 +18,8 @@ class EntityPopulator
      *
      * @param string $class A Propel ActiveRecord classname
      */
-    public function __construct($class)
+    public function __construct(protected $class)
     {
-        $this->class = $class;
     }
 
     /**
@@ -38,7 +36,6 @@ class EntityPopulator
     }
 
     /**
-     * @param \Faker\Generator $generator
      * @return array
      */
     public function guessColumnFormatters(\Faker\Generator $generator)
@@ -48,7 +45,7 @@ class EntityPopulator
         $peerClass = $class::PEER;
         $tableMap = $peerClass::getTableMap();
         $nameGuesser = new \Faker\Guesser\Name($generator);
-        $columnTypeGuesser = new \Faker\ORM\Propel\ColumnTypeGuesser($generator);
+        $columnTypeGuesser = new ColumnTypeGuesser($generator);
         foreach ($tableMap->getColumns() as $columnMap) {
             // skip behavior columns, handled by modifiers
             if ($this->isColumnBehavior($columnMap)) {
@@ -76,7 +73,6 @@ class EntityPopulator
     }
 
     /**
-     * @param ColumnMap $columnMap
      * @return bool
      */
     protected function isColumnBehavior(ColumnMap $columnMap)
@@ -108,7 +104,6 @@ class EntityPopulator
     }
 
     /**
-     * @param \Faker\Generator $generator
      * @return array
      */
     public function guessModifiers(\Faker\Generator $generator)

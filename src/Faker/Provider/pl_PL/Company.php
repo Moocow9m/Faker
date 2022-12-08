@@ -32,7 +32,7 @@ class Company extends \Faker\Provider\Company
     public static function regonLocal()
     {
         $weights = [2, 4, 8, 5, 0, 9, 7, 3, 6, 1, 2, 4, 8];
-        $result = str_split(static::regon());
+        $result = str_split((string) static::regon());
         for ($i = count($result), $size = count($weights); $i < $size; $i++) {
             $result[$i] = static::randomDigit();
         }

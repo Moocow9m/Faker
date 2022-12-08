@@ -9,9 +9,6 @@ class Populator
     protected $quantities = [];
     protected $guessers = [];
 
-    /**
-     * @param \Faker\Generator $generator
-     */
     public function __construct(\Faker\Generator $generator)
     {
         $this->generator = $generator;
@@ -55,10 +52,10 @@ class Populator
         }
 
         if (!method_exists($class, 'guessFormat')) {
-            throw new \Exception('Missing required custom guesser method: ' . get_class($class) . '::guessFormat()');
+            throw new \Exception('Missing required custom guesser method: ' . $class::class . '::guessFormat()');
         }
 
-        $this->guessers[get_class($class)] = $class;
+        $this->guessers[$class::class] = $class;
         return $this;
     }
 

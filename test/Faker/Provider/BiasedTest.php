@@ -11,7 +11,7 @@ final class BiasedTest extends TestCase
     public const MAX = 10;
     public const NUMBERS = 25000;
     /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     protected $generator;
     /**
@@ -21,7 +21,7 @@ final class BiasedTest extends TestCase
 
     public function testUnbiased()
     {
-        $this->performFake(['\\' . \Faker\Provider\Biased::class, 'unbiased']);
+        $this->performFake(['\\' . Biased::class, 'unbiased']);
 
         // assert that all numbers are near the expected unbiased value
         foreach ($this->results as $number => $amount) {
@@ -43,7 +43,7 @@ final class BiasedTest extends TestCase
 
     public function testLinearHigh()
     {
-        $this->performFake(['\\' . \Faker\Provider\Biased::class, 'linearHigh']);
+        $this->performFake(['\\' . Biased::class, 'linearHigh']);
 
         foreach ($this->results as $number => $amount) {
             // integral
@@ -57,7 +57,7 @@ final class BiasedTest extends TestCase
 
     public function testLinearLow()
     {
-        $this->performFake(['\\' . \Faker\Provider\Biased::class, 'linearLow']);
+        $this->performFake(['\\' . Biased::class, 'linearLow']);
 
         foreach ($this->results as $number => $amount) {
             // integral

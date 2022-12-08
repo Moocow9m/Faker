@@ -43,9 +43,8 @@ class Person extends \Faker\Provider\Person
 
     /**
      * This method generates a 3-digit valid area code to be used in nationalCode
-     * @return int|string
      */
-    private static function createAreaCode()
+    private static function createAreaCode(): int|string
     {
         $area = "000";
 

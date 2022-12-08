@@ -16,7 +16,7 @@ class EntityPopulator
     /**
      * When fetching existing data - fetch only few first rows.
      */
-    public const RELATED_FETCH_COUNT = 10;
+    final public const RELATED_FETCH_COUNT = 10;
 
     /**
      * @var Mapper
@@ -38,22 +38,17 @@ class EntityPopulator
     protected $modifiers = [];
 
     /**
-     * @var bool
-     */
-    protected $useExistingData = false;
-
-    /**
      * Class constructor.
      *
      * @param Mapper $mapper
      * @param Locator $locator
      * @param $useExistingData
+     * @param bool $useExistingData
      */
-    public function __construct(Mapper $mapper, Locator $locator, $useExistingData = false)
+    public function __construct(Mapper $mapper, Locator $locator, protected $useExistingData = false)
     {
         $this->mapper = $mapper;
         $this->locator = $locator;
-        $this->useExistingData = $useExistingData;
     }
 
     /**
@@ -88,16 +83,12 @@ class EntityPopulator
         $this->columnFormatters = array_merge($this->columnFormatters, $columnFormatters);
     }
 
-    /**
-     * @param array $modifiers
-     */
     public function mergeModifiersWith(array $modifiers)
     {
         $this->modifiers = array_merge($this->modifiers, $modifiers);
     }
 
     /**
-     * @param Generator $generator
      * @return array
      */
     public function guessColumnFormatters(Generator $generator)
@@ -209,9 +200,6 @@ class EntityPopulator
         return $this->modifiers;
     }
 
-    /**
-     * @param array $modifiers
-     */
     public function setModifiers(array $modifiers)
     {
         $this->modifiers = $modifiers;

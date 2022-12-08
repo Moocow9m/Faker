@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 final class TextTest extends TestCase
 {
-    private ?\Faker\Generator $generator = null;
+    private ?Generator $generator = null;
 
     /**
      * @before
@@ -35,10 +35,10 @@ final class TextTest extends TestCase
      */
     public function testTextMaxLength($length)
     {
-        $this->assertLessThan($length, $this->generator->realText($length));
+        $this->assertLessThan($length, strlen($this->generator->realText($length)));
     }
 
-    public function testTextMaxIndex()
+    public function testTextMaxIndex(): never
     {
         $this->expectException('InvalidArgumentException');
 
@@ -47,7 +47,7 @@ final class TextTest extends TestCase
         $this->fail('The index should be less than or equal to 5.');
     }
 
-    public function testTextMinIndex()
+    public function testTextMinIndex(): never
     {
         $this->expectException('InvalidArgumentException');
 
@@ -56,7 +56,7 @@ final class TextTest extends TestCase
         $this->fail('The index should be greater than or equal to 1.');
     }
 
-    public function testTextMinLength()
+    public function testTextMinLength(): never
     {
         $this->expectException('InvalidArgumentException');
 

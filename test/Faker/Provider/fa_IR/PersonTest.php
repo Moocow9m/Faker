@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 final class PersonTest extends TestCase
 {
-    private \Faker\Generator $faker;
+    private Generator $faker;
 
     public function testNationalCode()
     {
@@ -18,8 +18,8 @@ final class PersonTest extends TestCase
             // nationalCode should be in the format ##########
             $this->assertMatchesRegularExpression('/^[0-9]{10}$/', $nationalCode);
 
-            $areaCode = substr($nationalCode, 0, 3);
-            $controlCode = substr($nationalCode, 9, 1);
+            $areaCode = substr((string) $nationalCode, 0, 3);
+            $controlCode = substr((string) $nationalCode, 9, 1);
 
             // the areaCode must in the format ###, excluding '000'
             $this->assertNotEquals('000', $areaCode);

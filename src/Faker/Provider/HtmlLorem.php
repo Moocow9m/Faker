@@ -7,30 +7,30 @@ use Faker\UniqueGenerator;
 
 class HtmlLorem extends Base
 {
-    public const HTML_TAG = "html";
-    public const HEAD_TAG = "head";
-    public const BODY_TAG = "body";
-    public const DIV_TAG = "div";
-    public const P_TAG = "p";
-    public const A_TAG = "a";
-    public const SPAN_TAG = "span";
-    public const TABLE_TAG = "table";
-    public const THEAD_TAG = "thead";
-    public const TBODY_TAG = "tbody";
-    public const TR_TAG = "tr";
-    public const TD_TAG = "td";
-    public const TH_TAG = "th";
-    public const UL_TAG = "ul";
-    public const LI_TAG = "li";
-    public const H_TAG = "h";
-    public const B_TAG = "b";
-    public const I_TAG = "i";
-    public const TITLE_TAG = "title";
-    public const FORM_TAG = "form";
-    public const INPUT_TAG = "input";
-    public const LABEL_TAG = "label";
+    final public const HTML_TAG = "html";
+    final public const HEAD_TAG = "head";
+    final public const BODY_TAG = "body";
+    final public const DIV_TAG = "div";
+    final public const P_TAG = "p";
+    final public const A_TAG = "a";
+    final public const SPAN_TAG = "span";
+    final public const TABLE_TAG = "table";
+    final public const THEAD_TAG = "thead";
+    final public const TBODY_TAG = "tbody";
+    final public const TR_TAG = "tr";
+    final public const TD_TAG = "td";
+    final public const TH_TAG = "th";
+    final public const UL_TAG = "ul";
+    final public const LI_TAG = "li";
+    final public const H_TAG = "h";
+    final public const B_TAG = "b";
+    final public const I_TAG = "i";
+    final public const TITLE_TAG = "title";
+    final public const FORM_TAG = "form";
+    final public const INPUT_TAG = "input";
+    final public const LABEL_TAG = "label";
 
-    private ?\Faker\UniqueGenerator $idGenerator = null;
+    private ?UniqueGenerator $idGenerator = null;
 
     public function __construct(Generator $generator)
     {
@@ -130,35 +130,17 @@ class HtmlLorem extends Base
     private function addRandomLeaf(\DOMElement $node)
     {
         $rand = mt_rand(1, 10);
-        switch ($rand) {
-            case 1:
-                $this->addRandomP($node);
-                break;
-            case 2:
-                $this->addRandomA($node);
-                break;
-            case 3:
-                $this->addRandomSpan($node);
-                break;
-            case 4:
-                $this->addRandomUL($node);
-                break;
-            case 5:
-                $this->addRandomH($node);
-                break;
-            case 6:
-                $this->addRandomB($node);
-                break;
-            case 7:
-                $this->addRandomI($node);
-                break;
-            case 8:
-                $this->addRandomTable($node);
-                break;
-            default:
-                $this->addRandomText($node);
-                break;
-        }
+        match ($rand) {
+            1 => $this->addRandomP($node),
+            2 => $this->addRandomA($node),
+            3 => $this->addRandomSpan($node),
+            4 => $this->addRandomUL($node),
+            5 => $this->addRandomH($node),
+            6 => $this->addRandomB($node),
+            7 => $this->addRandomI($node),
+            8 => $this->addRandomTable($node),
+            default => $this->addRandomText($node),
+        };
     }
 
     private function addRandomP(\DOMElement $element, $maxLength = 10)

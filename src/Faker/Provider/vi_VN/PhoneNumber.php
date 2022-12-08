@@ -112,13 +112,13 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
     public function phoneNumber()
     {
         $areaCode = static::randomElement(static::$areaCodes);
-        $areaCodeLength = strlen($areaCode);
+        $areaCodeLength = strlen((string) $areaCode);
         $digits = 7;
 
         if ($areaCodeLength < 2) {
             $digits = 8;
         }
 
-        return static::numerify(str_replace('[a]', $areaCode, static::randomElement(static::$formats[$digits])));
+        return static::numerify(str_replace('[a]', $areaCode, (string) static::randomElement(static::$formats[$digits])));
     }
 }
