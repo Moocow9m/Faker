@@ -8,6 +8,9 @@ build: fix test ## Runs fix and test targets
 coverage: vendor/autoload.php ## Collects coverage with phpunit
 	vendor/bin/phpunit --coverage-text --coverage-clover=.build/logs/clover.xml
 
+migrate-phpunit: vendor/autoload.php ## Collects coverage with phpunit
+	vendor/bin/phpunit --migrate-configuration
+
 fix: vendor/autoload.php ## Fixes code style issues with phpcbf
 	vendor/bin/phpcbf --standard=PSR2 src
 

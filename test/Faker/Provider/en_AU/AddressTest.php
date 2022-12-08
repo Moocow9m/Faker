@@ -18,7 +18,7 @@ final class AddressTest extends TestCase
         $cityPrefix = $this->faker->cityPrefix();
         $this->assertNotEmpty($cityPrefix);
         $this->assertIsString($cityPrefix);
-        $this->assertRegExp('/[A-Z][a-z]+/', $cityPrefix);
+        $this->assertMatchesRegularExpression('/[A-Z][a-z]+/', $cityPrefix);
     }
 
     public function testStreetSuffix()
@@ -26,7 +26,7 @@ final class AddressTest extends TestCase
         $streetSuffix = $this->faker->streetSuffix();
         $this->assertNotEmpty($streetSuffix);
         $this->assertIsString($streetSuffix);
-        $this->assertRegExp('/[A-Z][a-z]+/', $streetSuffix);
+        $this->assertMatchesRegularExpression('/[A-Z][a-z]+/', $streetSuffix);
     }
 
     public function testState()
@@ -34,7 +34,7 @@ final class AddressTest extends TestCase
         $state = $this->faker->state();
         $this->assertNotEmpty($state);
         $this->assertIsString($state);
-        $this->assertRegExp('/[A-Z][a-z]+/', $state);
+        $this->assertMatchesRegularExpression('/[A-Z][a-z]+/', $state);
     }
 
     protected function setUp(): void

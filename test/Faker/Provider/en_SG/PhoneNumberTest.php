@@ -18,7 +18,7 @@ final class PhoneNumberTest extends TestCase
             $startsWith9 = preg_match('/^(\+65|65)?\s*9/', $mobileNumber);
         }
 
-        $this->assertRegExp('/^(\+65|65)?\s*9\s*[0-8]\d{2}\s*\d{4}$/', $mobileNumber);
+        $this->assertMatchesRegularExpression('/^(\+65|65)?\s*9\s*[0-8]\d{2}\s*\d{4}$/', $mobileNumber);
     }
 
     // http://en.wikipedia.org/wiki/Telephone_numbers_in_Singapore#Numbering_plan
@@ -32,7 +32,7 @@ final class PhoneNumberTest extends TestCase
             $mobileNumber = $this->faker->mobileNumber();
             $startsWith8 = preg_match('/^(\+65|65)?\s*8/', $mobileNumber);
         }
-        $this->assertRegExp('/^(\+65|65)?\s*8\s*[1-8]\d{2}\s*\d{4}$/', $mobileNumber);
+        $this->assertMatchesRegularExpression('/^(\+65|65)?\s*8\s*[1-8]\d{2}\s*\d{4}$/', $mobileNumber);
     }
 
     // http://en.wikipedia.org/wiki/Telephone_numbers_in_Singapore#Numbering_plan

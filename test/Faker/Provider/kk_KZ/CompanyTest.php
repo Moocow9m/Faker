@@ -15,7 +15,7 @@ final class CompanyTest extends TestCase
         $businessIdentificationNumber = $this->faker->businessIdentificationNumber($registrationDate);
         $registrationDateAsString = $registrationDate->format('ym');
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             "/^(" . $registrationDateAsString . ")([4-6]{1})([0-3]{1})(\\d{6})$/",
             $businessIdentificationNumber
         );

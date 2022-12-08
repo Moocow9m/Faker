@@ -15,8 +15,8 @@ final class PaymentTest extends TestCase
     {
         $vat = $this->faker->vat();
         $unspacedVat = $this->faker->vat(false);
-        $this->assertRegExp('/^(BG \d{9,10})$/', $vat);
-        $this->assertRegExp('/^(BG\d{9,10})$/', $unspacedVat);
+        $this->assertMatchesRegularExpression('/^(BG \d{9,10})$/', $vat);
+        $this->assertMatchesRegularExpression('/^(BG\d{9,10})$/', $unspacedVat);
     }
 
     protected function setUp(): void

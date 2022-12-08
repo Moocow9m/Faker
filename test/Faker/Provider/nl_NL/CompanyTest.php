@@ -15,7 +15,7 @@ final class CompanyTest extends TestCase
         $vatNo = $this->faker->vat();
 
         $this->assertEquals(14, strlen($vatNo));
-        $this->assertRegExp('/^NL[0-9]{9}B[0-9]{2}$/', $vatNo);
+        $this->assertMatchesRegularExpression('/^NL[0-9]{9}B[0-9]{2}$/', $vatNo);
     }
 
     public function testGenerateValidBtwNumberAlias()
@@ -23,7 +23,7 @@ final class CompanyTest extends TestCase
         $btwNo = $this->faker->btw();
 
         $this->assertEquals(14, strlen($btwNo));
-        $this->assertRegExp('/^NL[0-9]{9}B[0-9]{2}$/', $btwNo);
+        $this->assertMatchesRegularExpression('/^NL[0-9]{9}B[0-9]{2}$/', $btwNo);
     }
 
     protected function setUp(): void

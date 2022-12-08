@@ -17,7 +17,7 @@ final class PersonTest extends TestCase
             $number = $this->faker->ssn;
 
             // should be in the format ###-##-####
-            $this->assertRegExp('/^[0-9]{3}-[0-9]{2}-[0-9]{4}$/', $number);
+            $this->assertMatchesRegularExpression('/^[0-9]{3}-[0-9]{2}-[0-9]{4}$/', $number);
 
             $parts = explode("-", $number);
 

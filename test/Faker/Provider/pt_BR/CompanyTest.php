@@ -12,9 +12,9 @@ final class CompanyTest extends TestCase
     public function testCnpjFormatIsValid()
     {
         $cnpj = $this->faker->cnpj(false);
-        $this->assertRegExp('/\d{8}\d{4}\d{2}/', $cnpj);
+        $this->assertMatchesRegularExpression('/\d{8}\d{4}\d{2}/', $cnpj);
         $cnpj = $this->faker->cnpj(true);
-        $this->assertRegExp('/\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}/', $cnpj);
+        $this->assertMatchesRegularExpression('/\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}/', $cnpj);
     }
 
     protected function setUp(): void
